@@ -129,7 +129,135 @@ router.post('/', requireAuth, async (req: AuthRequest, res: Response) => {
   }
 });
 
-// TODO: Add PUT /api/campaigns/:id endpoint
-// Update campaign details (name, budget, dates, status, etc.)
+// PUT /api/campaigns/:id - Update campaign (protected)
+router.put('/:id', requireAuth, async (req: AuthRequest, res: Response) => {
+  try {
+    if (!req.user?.sponsorId) {
+      res.status(403).json({ error: 'Only sponsors can update campaigns' });
+      return;
+    }
+
+    const id = getParam(req.params.id);
+
+    // Check if campaign exists and verify ownership
+    const existingCampaign = await prisma.campaign.findUnique({
+      where: { id },
+      select: { sponsorId: true },
+    });
+
+    if (!existingCampaign) {
+      res.status(404).json({ error: 'Campaign not found' });
+      return;
+    }
+
+    if (existingCampaign.sponsorId !== req.user.sponsorId) {
+      res.status(403).json({ error: 'Forbidden - You do not own this campaign' });
+      return;
+    }
+
+    const {
+      name,
+      description,
+      budget,
+      cpmRate,
+      cpcRate,
+      startDate,
+      endDate,
+      targetCategories,
+      targetRegions,
+      status,
+    } = req.body;
+
+    // Validate status if provided
+    if (status && !['ACTIVE', 'PAUSED', 'COMPLETED'].includes(status)) {
+      res.status(400).json({ error: 'Invalid status value' });
+      return;
+    }
+
+    // Validate budget if provided
+    if (budget !== undefined && budget <= 0) {
+      res.status(400).json({ error: 'Budget must be positive' });
+      return;
+    }
+
+    // Build update data object (only include provided fields)
+    interface CampaignUpdateData {
+      name?: string;
+      description?: string | null;
+      budget?: number;
+      cpmRate?: number | null;
+      cpcRate?: number | null;
+      startDate?: Date;
+      endDate?: Date;
+      targetCategories?: string[];
+      targetRegions?: string[];
+      status?: 'ACTIVE' | 'PAUSED' | 'COMPLETED';
+    }
+
+    const updateData: CampaignUpdateData = {};
+    if (name !== undefined) updateData.name = name;
+    if (description !== undefined) updateData.description = description;
+    if (budget !== undefined) updateData.budget = budget;
+    if (cpmRate !== undefined) updateData.cpmRate = cpmRate;
+    if (cpcRate !== undefined) updateData.cpcRate = cpcRate;
+    if (startDate !== undefined) updateData.startDate = new Date(startDate);
+    if (endDate !== undefined) updateData.endDate = new Date(endDate);
+    if (targetCategories !== undefined) updateData.targetCategories = targetCategories;
+    if (targetRegions !== undefined) updateData.targetRegions = targetRegions;
+    if (status !== undefined) updateData.status = status;
+
+    const campaign = await prisma.campaign.update({
+      where: { id },
+      data: updateData,
+      include: {
+        sponsor: { select: { id: true, name: true } },
+        _count: { select: { creatives: true, placements: true } },
+      },
+    });
+
+    res.json(campaign);
+  } catch (error) {
+    console.error('Error updating campaign:', error);
+    res.status(500).json({ error: 'Failed to update campaign' });
+  }
+});
+
+// DELETE /api/campaigns/:id - Delete campaign (protected)
+router.delete('/:id', requireAuth, async (req: AuthRequest, res: Response) => {
+  try {
+    if (!req.user?.sponsorId) {
+      res.status(403).json({ error: 'Only sponsors can delete campaigns' });
+      return;
+    }
+
+    const id = getParam(req.params.id);
+
+    // Check if campaign exists and verify ownership
+    const existingCampaign = await prisma.campaign.findUnique({
+      where: { id },
+      select: { sponsorId: true },
+    });
+
+    if (!existingCampaign) {
+      res.status(404).json({ error: 'Campaign not found' });
+      return;
+    }
+
+    if (existingCampaign.sponsorId !== req.user.sponsorId) {
+      res.status(403).json({ error: 'Forbidden - You do not own this campaign' });
+      return;
+    }
+
+    // Delete the campaign (cascading deletes will handle related records)
+    await prisma.campaign.delete({
+      where: { id },
+    });
+
+    res.status(204).send();
+  } catch (error) {
+    console.error('Error deleting campaign:', error);
+    res.status(500).json({ error: 'Failed to delete campaign' });
+  }
+});
 
 export default router;
