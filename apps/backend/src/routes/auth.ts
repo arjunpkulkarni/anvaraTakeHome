@@ -1,5 +1,6 @@
-import { Router, type Request, type Response, type IRouter } from 'express';
+import { Router, type Response, type IRouter } from 'express';
 import { prisma } from '../db.js';
+import { requireAuth, type AuthRequest } from '../auth.js';
 
 const router: IRouter = Router();
 
@@ -7,22 +8,22 @@ const router: IRouter = Router();
 // This route is kept for any backend-specific auth utilities
 
 // POST /api/auth/login - Placeholder (Better Auth handles login via frontend)
-router.post('/login', async (_req: Request, res: Response) => {
+router.post('/login', async (_req: AuthRequest, res: Response) => {
   res.status(400).json({
     error: 'Use the frontend login at /login instead',
     hint: 'Better Auth handles authentication via the Next.js frontend',
   });
 });
 
-// GET /api/auth/me - Get current user (for API clients)
-router.get('/me', async (req: Request, res: Response) => {
-  // TODO: Challenge 3 - Implement auth middleware to validate session
-  // For now, return unauthorized
-  res.status(401).json({ error: 'Not authenticated' });
+// GET /api/auth/me - Get current authenticated user
+router.get('/me', requireAuth, async (req: AuthRequest, res: Response) => {
+  res.json({
+    user: req.user,
+  });
 });
 
 // GET /api/auth/role/:userId - Get user role based on Sponsor/Publisher records
-router.get('/role/:userId', async (req: Request, res: Response) => {
+router.get('/role/:userId', async (req: AuthRequest, res: Response) => {
   try {
     const userId = req.params.userId as string;
 

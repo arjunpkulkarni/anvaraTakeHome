@@ -4,12 +4,19 @@ import { auth } from '@/auth';
 import { getUserRole } from '@/lib/auth-helpers';
 import { CampaignList } from './components/campaign-list';
 
+// eslint-disable-next-line turbo/no-undeclared-env-vars
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291';
 
-async function getCampaigns(sponsorId: string) {
+async function getCampaigns(sponsorId: string, requestHeaders: Headers) {
   try {
+    // Forward cookies to the backend for authentication
+    const cookieHeader = requestHeaders.get('cookie') || '';
+
     const res = await fetch(`${API_URL}/api/campaigns?sponsorId=${sponsorId}`, {
       cache: 'no-store', // Always fetch fresh data
+      headers: {
+        Cookie: cookieHeader,
+      },
     });
 
     if (!res.ok) {
@@ -18,14 +25,16 @@ async function getCampaigns(sponsorId: string) {
 
     return await res.json();
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching campaigns:', error);
     return [];
   }
 }
 
 export default async function SponsorDashboard() {
+  const headersList = await headers();
   const session = await auth.api.getSession({
-    headers: await headers(),
+    headers: headersList,
   });
 
   if (!session?.user) {
@@ -38,8 +47,8 @@ export default async function SponsorDashboard() {
     redirect('/');
   }
 
-  // Fetch campaigns on the server
-  const campaigns = roleData.sponsorId ? await getCampaigns(roleData.sponsorId) : [];
+  // Fetch campaigns on the server, passing headers for authentication
+  const campaigns = roleData.sponsorId ? await getCampaigns(roleData.sponsorId, headersList) : [];
 
   return (
     <div className="space-y-6">
