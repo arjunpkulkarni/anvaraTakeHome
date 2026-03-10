@@ -22,21 +22,21 @@ export function HeroSection() {
             <span className="text-[var(--color-primary)]">Modern Creators</span>
           </h1>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <Link
-              href="/login"
-              className="min-w-[200px] inline-flex items-center justify-center rounded-lg bg-black px-6 py-3 text-white font-medium transition hover:opacity-90"
-            >
-              Get Started Free
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+              <Link
+                href="/login"
+                className="min-w-[200px] inline-flex items-center justify-center rounded-lg bg-black px-6 py-3 text-lg font-medium transition hover:opacity-90 text-white hover:text-white"
+              >
+                Get Started Free
+              </Link>
 
-            <Link
-              href="/marketplace"
-              className="min-w-[200px] inline-flex items-center justify-center rounded-lg bg-black px-6 py-3 text-white font-medium transition hover:opacity-90"
-            >
-              Browse Marketplace
-            </Link>
-          </div>
+              <Link
+                href="/marketplace"
+                className="min-w-[200px] inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-6 py-3 text-lg font-medium transition hover:bg-gray-50 text-gray-900"
+              >
+                Browse Marketplace
+              </Link>
+            </div>
 
           <div className="pt-8 flex flex-col items-center gap-4">
             <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
