@@ -6,7 +6,8 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
+  // Await params to satisfy Next.js requirements
+  await params;
   
   // In a real app, you would fetch the ad slot data here to generate dynamic metadata
   // For now, we'll use a generic template

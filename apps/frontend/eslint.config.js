@@ -4,8 +4,17 @@ export default [
   ...reactConfig,
   {
     files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      globals: {
+        process: 'readonly',
+        React: 'readonly',
+        RequestInit: 'readonly',
+      },
+    },
     rules: {
       // Frontend-specific rules
+      'no-console': ['warn', { allow: ['warn', 'error', 'log'] }],
+      'react/no-unescaped-entities': 'off', // Allow apostrophes and quotes in JSX
     },
   },
 ];

@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer } from '@/lib/animations';
 
 export function CTASection() {
   const testimonials = [
@@ -41,7 +43,7 @@ export function CTASection() {
     >
       {/* Background Pattern */}
       <div className="absolute inset-0" style={{ opacity: 0.1 }}>
-        <div
+        <motion.div
           className="absolute top-0 left-0 rounded-full"
           style={{
             width: '384px',
@@ -49,8 +51,18 @@ export function CTASection() {
             background: 'white',
             filter: 'blur(80px)',
           }}
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
         />
-        <div
+        <motion.div
           className="absolute bottom-0 right-0 rounded-full"
           style={{
             width: '384px',
@@ -58,14 +70,31 @@ export function CTASection() {
             background: 'white',
             filter: 'blur(80px)',
           }}
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, -50, 0],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 2,
+          }}
         />
       </div>
 
       <div className="container px-4 relative" style={{ zIndex: 10, maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           {/* Testimonials */}
-          <div style={{marginBottom: '64px'}}>
-            <h2
+          <motion.div 
+            style={{marginBottom: '64px'}}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
+            <motion.h2
               className="text-center text-white"
               style={{
                 fontSize: '18px',
@@ -74,12 +103,13 @@ export function CTASection() {
                 opacity: 0.9,
                 marginBottom: '28px'
               }}
+              variants={fadeInUp}
             >
               Trusted by thousands of brands and creators
-            </h2>
+            </motion.h2>
             <div className="grid md:grid-cols-3 gap-6">
               {testimonials.map((testimonial, index) => (
-                <div
+                <motion.div
                   key={index}
                   className="rounded-2xl p-6"
                   style={{
@@ -87,19 +117,39 @@ export function CTASection() {
                     backdropFilter: 'blur(8px)',
                     border: '1px solid rgba(255, 255, 255, 0.2)',
                   }}
+                  variants={fadeInUp}
+                  whileHover={{ 
+                    y: -8,
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+                  }}
+                  transition={{ duration: 0.3 }}
                 >
                   <div className="flex gap-1 mb-4">
                     {[1, 2, 3, 4, 5].map((star) => (
-                      <svg key={star} className="w-4 h-4" viewBox="0 0 20 20" style={{ fill: '#fbbf24' }}>
+                      <motion.svg 
+                        key={star} 
+                        className="w-4 h-4" 
+                        viewBox="0 0 20 20" 
+                        style={{ fill: '#fbbf24' }}
+                        initial={{ scale: 0, rotate: -180 }}
+                        whileInView={{ scale: 1, rotate: 0 }}
+                        viewport={{ once: true }}
+                        transition={{
+                          delay: index * 0.1 + star * 0.05,
+                          type: 'spring',
+                          stiffness: 400,
+                          damping: 20,
+                        }}
+                      >
                         <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                      </svg>
+                      </motion.svg>
                     ))}
                   </div>
                   <p className="text-white mb-4" style={{ fontSize: '14px', lineHeight: '1.6' }}>
                     "{testimonial.quote}"
                   </p>
                   <div className="flex items-center gap-3">
-                    <div
+                    <motion.div
                       className="rounded-full flex items-center justify-center text-white font-semibold"
                       style={{
                         width: '40px',
@@ -107,9 +157,11 @@ export function CTASection() {
                         background: 'rgba(255, 255, 255, 0.2)',
                         fontSize: '14px',
                       }}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ duration: 0.2 }}
                     >
                       {testimonial.avatar}
-                    </div>
+                    </motion.div>
                     <div>
                       <div className="text-white font-medium" style={{ fontSize: '14px' }}>
                         {testimonial.author}
@@ -119,78 +171,88 @@ export function CTASection() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Main CTA */}
-          <div className="text-center" style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-            <h2
+          <motion.div 
+            className="text-center" 
+            style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2
               id="cta-heading"
-              className="text-white"
               style={{
                 fontSize: '48px',
                 fontWeight: 700,
+                color: 'white',
                 lineHeight: '1.2',
               }}
+              variants={fadeInUp}
             >
               Ready to Transform Your{' '}
               <span style={{ color: '#fcd34d' }}>Sponsorship Strategy?</span>
-            </h2>
+            </motion.h2>
 
             {/* CTA Buttons */}
-            <div
+            <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
               style={{ paddingTop: '16px' }}
+              variants={fadeInUp}
             >
-              <Link
-                href="/login"
-                className="inline-flex items-center justify-center rounded-lg font-semibold transition-all"
-                style={{
-                  minWidth: '220px',
-                  padding: '12px 24px',
-                  fontSize: '18px',
-                  background: 'white',
-                  color: '#2563eb',
-                  boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.background = '#f9fafb';
-                  e.currentTarget.style.boxShadow = '0 25px 50px -12px rgb(0 0 0 / 0.25)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.background = 'white';
-                  e.currentTarget.style.boxShadow = '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)';
-                }}
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
               >
-                Start Free Trial
-              </Link>
-              <Link
-                href="/marketplace"
-                className="inline-flex items-center justify-center rounded-lg font-semibold transition-all"
-                style={{
-                  minWidth: '220px',
-                  padding: '12px 24px',
-                  fontSize: '18px',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  color: 'white',
-                  border: '2px solid rgba(255, 255, 255, 0.3)',
-                  backdropFilter: 'blur(8px)',
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                }}
+                <Link
+                  href="/login"
+                  className="inline-flex items-center justify-center rounded-lg font-semibold transition-all"
+                  style={{
+                    minWidth: '220px',
+                    padding: '12px 24px',
+                    fontSize: '18px',
+                    background: 'white',
+                    color: '#2563eb',
+                    boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+                  }}
+                >
+                  Start Free Trial
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
               >
-                Explore Marketplace
-              </Link>
-            </div>
+                <Link
+                  href="/marketplace"
+                  className="inline-flex items-center justify-center rounded-lg font-semibold transition-all"
+                  style={{
+                    minWidth: '220px',
+                    padding: '12px 24px',
+                    fontSize: '18px',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    color: 'white',
+                    border: '2px solid rgba(255, 255, 255, 0.3)',
+                    backdropFilter: 'blur(8px)',
+                  }}
+                >
+                  Explore Marketplace
+                </Link>
+              </motion.div>
+            </motion.div>
 
             {/* Trust Signals */}
-            <div style={{ paddingTop: '32px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <motion.div 
+              style={{ paddingTop: '32px', display: 'flex', flexDirection: 'column', gap: '16px' }}
+              variants={fadeInUp}
+            >
               <div
                 className="flex items-center justify-center gap-2 text-white flex-wrap"
                 style={{
@@ -221,7 +283,7 @@ export function CTASection() {
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-8">
                   {trustedBy.map((brand, index) => (
-                    <div
+                    <motion.div
                       key={index}
                       className="rounded-lg flex items-center justify-center"
                       style={{
@@ -231,16 +293,24 @@ export function CTASection() {
                         border: '1px solid rgba(255, 255, 255, 0.2)',
                         backdropFilter: 'blur(8px)',
                       }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ 
+                        scale: 1.1,
+                        background: 'rgba(255, 255, 255, 0.2)',
+                      }}
                     >
                       <span className="text-white font-bold" style={{ fontSize: '14px' }}>
                         {brand.logo}
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

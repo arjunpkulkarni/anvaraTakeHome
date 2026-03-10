@@ -23,7 +23,7 @@ export async function requireAuth(
   try {
     // Extract session from request headers/cookies
     const session = await auth.api.getSession({
-      headers: req.headers as any,
+      headers: req.headers as Record<string, string | string[] | undefined>,
     });
 
     if (!session?.user) {

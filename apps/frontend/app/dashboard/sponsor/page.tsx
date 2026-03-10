@@ -57,18 +57,67 @@ export default async function SponsorDashboard() {
   const campaigns = roleData.sponsorId ? await getCampaigns(roleData.sponsorId) : [];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <header className="mb-8">
-        <div className="flex items-center justify-between mb-2">
-          <h1 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)]">My Campaigns</h1>
+    <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px' }}>
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '32px', fontWeight: '600', color: '#111827' }}>
+            Campaigns
+          </h1>
           <CreateCampaignButton />
         </div>
-        <p className="text-[var(--color-text-secondary)]">
-          Manage your advertising campaigns and track their performance
-        </p>
-      </header>
 
-      <CampaignList campaigns={campaigns} />
+        {/* Tab Filters */}
+        <div style={{ marginBottom: '32px' }}>
+          <div style={{ display: 'inline-flex', backgroundColor: 'white', borderRadius: '12px', padding: '4px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+            <button
+              style={{
+                padding: '8px 24px',
+                borderRadius: '8px',
+                backgroundColor: 'white',
+                color: '#111827',
+                fontWeight: '500',
+                fontSize: '14px',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+              }}
+            >
+              Active
+            </button>
+            <button
+              style={{
+                padding: '8px 24px',
+                borderRadius: '8px',
+                backgroundColor: 'transparent',
+                color: '#6b7280',
+                fontWeight: '500',
+                fontSize: '14px',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              Draft
+            </button>
+            <button
+              style={{
+                padding: '8px 24px',
+                borderRadius: '8px',
+                backgroundColor: 'transparent',
+                color: '#6b7280',
+                fontWeight: '500',
+                fontSize: '14px',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              Archived
+            </button>
+          </div>
+        </div>
+
+        <CampaignList campaigns={campaigns} />
+      </div>
     </div>
   );
 }

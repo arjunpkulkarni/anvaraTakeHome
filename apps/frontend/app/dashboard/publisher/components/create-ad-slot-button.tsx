@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { AdSlotForm } from './ad-slot-form';
-import { Button } from '@/app/components/ui';
 
 export function CreateAdSlotButton() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   if (isOpen) {
     return (
@@ -19,8 +19,24 @@ export function CreateAdSlotButton() {
   }
 
   return (
-    <Button onClick={() => setIsOpen(true)}>
-      Create Ad Slot
-    </Button>
+    <button
+      onClick={() => setIsOpen(true)}
+      onMouseOver={() => setIsHovered(true)}
+      onMouseOut={() => setIsHovered(false)}
+      style={{
+        padding: '12px 24px',
+        backgroundColor: '#4f46e5',
+        color: 'white',
+        borderRadius: '8px',
+        fontSize: '14px',
+        fontWeight: '500',
+        border: 'none',
+        cursor: 'pointer',
+        transition: 'background-color 0.2s',
+        ...(isHovered && { backgroundColor: '#4338ca' }),
+      }}
+    >
+      Create New Listing
+    </button>
   );
 }

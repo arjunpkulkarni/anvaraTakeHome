@@ -6,7 +6,6 @@ import { getUserRole } from '@/lib/auth-helpers';
 import { AdSlotList } from './components/ad-slot-list';
 import { CreateAdSlotButton } from './components/create-ad-slot-button';
 
-// eslint-disable-next-line no-process-env
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291';
 
 export const metadata: Metadata = {
@@ -70,18 +69,67 @@ export default async function PublisherDashboard() {
   const adSlots = roleData.publisherId ? await getAdSlots(roleData.publisherId) : [];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <header className="mb-8">
-        <div className="flex items-center justify-between mb-2">
-          <h1 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)]">My Ad Slots</h1>
+    <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px' }}>
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '32px', fontWeight: '600', color: '#111827' }}>
+            Listings
+          </h1>
           <CreateAdSlotButton />
         </div>
-        <p className="text-[var(--color-text-secondary)]">
-          Manage your available ad slots and monitor bookings
-        </p>
-      </header>
 
-      <AdSlotList adSlots={adSlots} />
+        {/* Tab Filters */}
+        <div style={{ marginBottom: '32px' }}>
+          <div style={{ display: 'inline-flex', backgroundColor: 'white', borderRadius: '12px', padding: '4px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+            <button
+              style={{
+                padding: '8px 24px',
+                borderRadius: '8px',
+                backgroundColor: 'white',
+                color: '#111827',
+                fontWeight: '500',
+                fontSize: '14px',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+              }}
+            >
+              Active
+            </button>
+            <button
+              style={{
+                padding: '8px 24px',
+                borderRadius: '8px',
+                backgroundColor: 'transparent',
+                color: '#6b7280',
+                fontWeight: '500',
+                fontSize: '14px',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              Draft
+            </button>
+            <button
+              style={{
+                padding: '8px 24px',
+                borderRadius: '8px',
+                backgroundColor: 'transparent',
+                color: '#6b7280',
+                fontWeight: '500',
+                fontSize: '14px',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              Archived
+            </button>
+          </div>
+        </div>
+
+        <AdSlotList adSlots={adSlots} />
+      </div>
     </div>
   );
 }

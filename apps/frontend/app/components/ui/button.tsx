@@ -1,6 +1,9 @@
-import { ButtonHTMLAttributes, forwardRef } from 'react';
+'use client';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+import { ButtonHTMLAttributes, forwardRef } from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
+
+interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag'> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'dark';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
@@ -29,14 +32,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const widthClass = fullWidth ? 'w-full' : '';
 
     return (
-      <button
+      <motion.button
         ref={ref}
         className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${widthClass} ${className}`}
         disabled={disabled}
-        {...props}
+        whileTap={disabled ? undefined : { scale: 0.95 }}
+        transition={{ duration: 0.1 }}
+        {...(props as HTMLMotionProps<'button'>)}
       >
         {children}
-      </button>
+      </motion.button>
     );
   }
 );

@@ -3,7 +3,6 @@
 import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 
-// eslint-disable-next-line no-process-env
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291';
 
 interface ActionState {
