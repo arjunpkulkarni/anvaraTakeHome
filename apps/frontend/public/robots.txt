@@ -1,0 +1,11 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow private pages
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://anvara.com/sitemap.xml

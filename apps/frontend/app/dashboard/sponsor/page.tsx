@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { headers, cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { auth } from '@/auth';
@@ -5,8 +6,16 @@ import { getUserRole } from '@/lib/auth-helpers';
 import { CampaignList } from './components/campaign-list';
 import { CreateCampaignButton } from './components/create-campaign-button';
 
-// eslint-disable-next-line no-process-env
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291';
+
+export const metadata: Metadata = {
+  title: 'My Campaigns - Sponsor Dashboard',
+  description: 'Manage your advertising campaigns, track performance, and optimize your sponsorship strategy. View campaign analytics and booking details.',
+  robots: {
+    index: false, // Dashboard pages should not be indexed
+    follow: false,
+  },
+};
 
 async function getCampaigns(sponsorId: string) {
   try {
@@ -48,11 +57,16 @@ export default async function SponsorDashboard() {
   const campaigns = roleData.sponsorId ? await getCampaigns(roleData.sponsorId) : [];
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">My Campaigns</h1>
-        <CreateCampaignButton />
-      </div>
+    <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <header className="mb-8">
+        <div className="flex items-center justify-between mb-2">
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)]">My Campaigns</h1>
+          <CreateCampaignButton />
+        </div>
+        <p className="text-[var(--color-text-secondary)]">
+          Manage your advertising campaigns and track their performance
+        </p>
+      </header>
 
       <CampaignList campaigns={campaigns} />
     </div>

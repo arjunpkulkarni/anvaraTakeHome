@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react';
 import { deleteAdSlot, toggleAdSlotAvailability } from '../actions';
 import { AdSlotForm } from './ad-slot-form';
+import { Button, Card, CardContent } from '@/app/components/ui';
 
 interface AdSlotCardProps {
   adSlot: {
@@ -52,70 +53,66 @@ export function AdSlotCard({ adSlot }: AdSlotCardProps) {
 
   if (isEditing) {
     return (
-      <div className="rounded-lg border border-[--color-border] p-4">
-        <h3 className="font-semibold mb-4">Edit Ad Slot</h3>
+      <Card>
+        <h3 className="text-lg font-semibold mb-4 text-[var(--color-text-primary)]">Edit Ad Slot</h3>
         <AdSlotForm
           adSlot={adSlot as any}
           onSuccess={() => setIsEditing(false)}
           onCancel={() => setIsEditing(false)}
         />
-      </div>
+      </Card>
     );
   }
 
   return (
-    <div className="rounded-lg border border-[--color-border] p-4">
-      {error && (
-        <div className="mb-3 rounded border border-red-200 bg-red-50 p-2 text-xs text-red-600">
-          {error}
+    <Card hover>
+      <CardContent>
+        {error && (
+          <div className="mb-3 rounded-lg border border-red-200 bg-red-50 p-2 text-xs text-[var(--color-error)]">
+            {error}
+          </div>
+        )}
+
+        <div className="mb-3 flex items-start justify-between">
+          <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">{adSlot.name}</h3>
+          <span className={`rounded-full px-3 py-1 text-xs font-medium ${typeColors[adSlot.type] || 'bg-gray-100'}`}>
+            {adSlot.type}
+          </span>
         </div>
-      )}
 
-      <div className="mb-2 flex items-start justify-between">
-        <h3 className="font-semibold">{adSlot.name}</h3>
-        <span className={`rounded px-2 py-0.5 text-xs ${typeColors[adSlot.type] || 'bg-gray-100'}`}>
-          {adSlot.type}
-        </span>
-      </div>
+        {adSlot.description && (
+          <p className="mb-4 text-sm text-[var(--color-text-secondary)] line-clamp-2">{adSlot.description}</p>
+        )}
 
-      {adSlot.description && (
-        <p className="mb-3 text-sm text-[--color-muted] line-clamp-2">{adSlot.description}</p>
-      )}
+        <div className="flex items-center justify-between mb-4">
+          <span
+            className={`text-sm font-medium ${adSlot.isAvailable ? 'text-[var(--color-success)]' : 'text-[var(--color-text-muted)]'}`}
+          >
+            {adSlot.isAvailable ? '● Available' : '● Booked'}
+          </span>
+          <span className="text-lg font-semibold text-[var(--color-primary)]">
+            ${Number(adSlot.basePrice).toLocaleString()}/mo
+          </span>
+        </div>
 
-      <div className="flex items-center justify-between mb-3">
-        <span
-          className={`text-sm ${adSlot.isAvailable ? 'text-green-600' : 'text-[--color-muted]'}`}
-        >
-          {adSlot.isAvailable ? 'Available' : 'Booked'}
-        </span>
-        <span className="font-semibold text-[--color-primary]">
-          ${Number(adSlot.basePrice).toLocaleString()}/mo
-        </span>
-      </div>
-
-      <div className="flex gap-2">
-        <button
-          onClick={() => setIsEditing(true)}
-          disabled={isPending}
-          className="flex-1 rounded border border-[--color-border] px-3 py-1.5 text-sm hover:bg-gray-50 disabled:opacity-50"
-        >
-          Edit
-        </button>
-        <button
-          onClick={handleToggleAvailability}
-          disabled={isPending}
-          className="flex-1 rounded border border-[--color-border] px-3 py-1.5 text-sm hover:bg-gray-50 disabled:opacity-50"
-        >
-          {isPending ? '...' : adSlot.isAvailable ? 'Mark Booked' : 'Mark Available'}
-        </button>
-        <button
-          onClick={handleDelete}
-          disabled={isPending}
-          className="rounded border border-red-200 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50 disabled:opacity-50"
-        >
-          {isPending ? '...' : 'Delete'}
-        </button>
-      </div>
-    </div>
+        <div className="flex gap-2">
+          <Button onClick={() => setIsEditing(true)} disabled={isPending} variant="secondary" size="sm" className="flex-1">
+            Edit
+          </Button>
+          <Button
+            onClick={handleToggleAvailability}
+            disabled={isPending}
+            variant="secondary"
+            size="sm"
+            className="flex-1"
+          >
+            {isPending ? '...' : adSlot.isAvailable ? 'Mark Booked' : 'Mark Available'}
+          </Button>
+          <Button onClick={handleDelete} disabled={isPending} variant="danger" size="sm">
+            {isPending ? '...' : 'Delete'}
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

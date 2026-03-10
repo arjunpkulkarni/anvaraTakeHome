@@ -16,14 +16,21 @@ interface AdSlotListProps {
 export function AdSlotList({ adSlots }: AdSlotListProps) {
   if (adSlots.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-[--color-border] p-8 text-center text-[--color-muted]">
-        No ad slots yet. Create your first ad slot to start earning.
+      <div className="rounded-xl border-2 border-dashed border-[var(--color-border)] bg-[var(--color-background-secondary)] p-12 text-center">
+        <div className="mx-auto max-w-sm">
+          <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
+            No ad slots yet
+          </h3>
+          <p className="text-[var(--color-text-secondary)] text-sm">
+            Create your first ad slot to start earning from advertisers.
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {adSlots.map((slot) => (
         <AdSlotCard key={slot.id} adSlot={slot} />
       ))}

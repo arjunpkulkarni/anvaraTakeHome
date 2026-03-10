@@ -2,7 +2,9 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { authClient } from '@/auth-client';
+import { Button } from './ui';
 
 type UserRole = 'sponsor' | 'publisher' | null;
 
@@ -10,9 +12,8 @@ export function Nav() {
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
   const [role, setRole] = useState<UserRole>(null);
+  const pathname = usePathname();
 
-  // TODO: Convert to server component and fetch role server-side
-  // Fetch user role from backend when user is logged in
   useEffect(() => {
     if (user?.id) {
       fetch(
@@ -26,20 +27,23 @@ export function Nav() {
     }
   }, [user?.id]);
 
-  // TODO: Add active link styling using usePathname() from next/navigation
-  // The current page's link should be highlighted differently
+  const isActive = (path: string) => pathname === path;
 
   return (
-    <header className="border-b border-[--color-border]">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between p-4">
-        <Link href="/" className="text-xl font-bold text-[--color-primary]">
+    <header className="sticky top-0 z-40 w-full border-b border-[var(--color-border)] bg-white/80 backdrop-blur-sm">
+      <nav className="container flex h-16 items-center justify-between">
+        <Link href="/" className="text-2xl font-bold text-[var(--color-primary)] hover:opacity-80 transition-opacity">
           Anvara
         </Link>
 
         <div className="flex items-center gap-6">
           <Link
             href="/marketplace"
-            className="text-[--color-muted] hover:text-[--color-foreground]"
+            className={`text-sm font-medium transition-colors ${
+              isActive('/marketplace')
+                ? 'text-[var(--color-text-primary)]'
+                : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+            }`}
           >
             Marketplace
           </Link>
@@ -47,7 +51,11 @@ export function Nav() {
           {user && role === 'sponsor' && (
             <Link
               href="/dashboard/sponsor"
-              className="text-[--color-muted] hover:text-[--color-foreground]"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/dashboard/sponsor')
+                  ? 'text-[var(--color-text-primary)]'
+                  : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+              }`}
             >
               My Campaigns
             </Link>
@@ -55,20 +63,26 @@ export function Nav() {
           {user && role === 'publisher' && (
             <Link
               href="/dashboard/publisher"
-              className="text-[--color-muted] hover:text-[--color-foreground]"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/dashboard/publisher')
+                  ? 'text-[var(--color-text-primary)]'
+                  : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+              }`}
             >
               My Ad Slots
             </Link>
           )}
 
           {isPending ? (
-            <span className="text-[--color-muted]">...</span>
+            <span className="text-[var(--color-text-muted)]">...</span>
           ) : user ? (
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-[--color-muted]">
-                {user.name} {role && `(${role})`}
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-[var(--color-text-secondary)]">
+                {user.name} {role && <span className="text-[var(--color-text-muted)]">({role})</span>}
               </span>
-              <button
+              <Button
+                size="sm"
+                variant="ghost"
                 onClick={async () => {
                   await authClient.signOut({
                     fetchOptions: {
@@ -78,17 +92,15 @@ export function Nav() {
                     },
                   });
                 }}
-                className="rounded bg-gray-600 px-3 py-1.5 text-sm text-white hover:bg-gray-500"
               >
                 Logout
-              </button>
+              </Button>
             </div>
           ) : (
-            <Link
-              href="/login"
-              className="rounded bg-[--color-primary] px-4 py-2 text-sm text-white hover:bg-[--color-primary-hover]"
-            >
-              Login
+            <Link href="/login">
+              <Button size="sm">
+                Login
+              </Button>
             </Link>
           )}
         </div>

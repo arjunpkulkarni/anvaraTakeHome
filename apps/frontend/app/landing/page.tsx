@@ -4,7 +4,7 @@ import {
   FeaturesSection,
   HowItWorksSection,
   CTASection,
-} from './landing/components';
+} from './components';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default function LandingPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
