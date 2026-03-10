@@ -222,7 +222,6 @@ router.put('/:id', requireAuth, async (req: AuthRequest, res: Response) => {
   }
 });
 
-// DELETE /api/campaigns/:id - Delete campaign (protected)
 router.delete('/:id', requireAuth, async (req: AuthRequest, res: Response) => {
   try {
     if (!req.user?.sponsorId) {

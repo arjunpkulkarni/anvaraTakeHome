@@ -1,21 +1,19 @@
-import { headers } from 'next/headers';
+import { headers, cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { auth } from '@/auth';
 import { getUserRole } from '@/lib/auth-helpers';
 import { CampaignList } from './components/campaign-list';
+import { CreateCampaignButton } from './components/create-campaign-button';
 
-// eslint-disable-next-line turbo/no-undeclared-env-vars
+// eslint-disable-next-line no-process-env
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291';
 
-async function getCampaigns(sponsorId: string, requestHeaders: Headers) {
+async function getCampaigns(sponsorId: string) {
   try {
-    // Forward cookies to the backend for authentication
-    const cookieHeader = requestHeaders.get('cookie') || '';
-
     const res = await fetch(`${API_URL}/api/campaigns?sponsorId=${sponsorId}`, {
-      cache: 'no-store', // Always fetch fresh data
+      cache: 'no-store',
       headers: {
-        Cookie: cookieHeader,
+        Cookie: (await cookies()).toString(),
       },
     });
 
@@ -25,7 +23,6 @@ async function getCampaigns(sponsorId: string, requestHeaders: Headers) {
 
     return await res.json();
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Error fetching campaigns:', error);
     return [];
   }
@@ -47,14 +44,14 @@ export default async function SponsorDashboard() {
     redirect('/');
   }
 
-  // Fetch campaigns on the server, passing headers for authentication
-  const campaigns = roleData.sponsorId ? await getCampaigns(roleData.sponsorId, headersList) : [];
+  // Fetch campaigns on the server
+  const campaigns = roleData.sponsorId ? await getCampaigns(roleData.sponsorId) : [];
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">My Campaigns</h1>
-        {/* TODO: Add CreateCampaignButton here */}
+        <CreateCampaignButton />
       </div>
 
       <CampaignList campaigns={campaigns} />
