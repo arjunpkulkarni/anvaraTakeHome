@@ -1,11 +1,6 @@
 import type { Metadata } from 'next';
 import { AdSlotGrid } from './components/ad-slot-grid';
 
-// FIXME: This page fetches all ad slots client-side. Consider:
-// 1. Server-side pagination with searchParams
-// 2. Filtering by category, price range, slot type
-// 3. Search functionality
-
 export const metadata: Metadata = {
   title: 'Marketplace - Browse Ad Slots',
   description: 'Browse available advertising slots from premium publishers. Find the perfect placement for your campaigns across video, display, podcast, and newsletter formats.',
@@ -23,16 +18,69 @@ export const metadata: Metadata = {
 
 export default function MarketplacePage() {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <header className="space-y-6 mb-8">
-        <div>
-          <h1 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)]">Marketplace</h1>
-          <p className="text-[var(--color-text-secondary)] mt-2">Browse available ad slots from our publishers</p>
-          {/* TODO: Add search input and filter controls */}
+    <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px' }}>
+        {/* Header */}
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '32px', fontWeight: '600', color: '#111827', marginBottom: '8px' }}>
+            Marketplace
+          </h1>
+          <p style={{ fontSize: '16px', color: '#6b7280' }}>
+            Browse available ad slots from our publishers
+          </p>
         </div>
-      </header>
 
-      <AdSlotGrid />
+        {/* Filter Tabs */}
+        <div style={{ marginBottom: '32px' }}>
+          <div style={{ display: 'inline-flex', backgroundColor: 'white', borderRadius: '12px', padding: '4px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+            <button
+              style={{
+                padding: '8px 24px',
+                borderRadius: '8px',
+                backgroundColor: 'white',
+                color: '#111827',
+                fontWeight: '500',
+                fontSize: '14px',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+              }}
+            >
+              All
+            </button>
+            <button
+              style={{
+                padding: '8px 24px',
+                borderRadius: '8px',
+                backgroundColor: 'transparent',
+                color: '#6b7280',
+                fontWeight: '500',
+                fontSize: '14px',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              Available
+            </button>
+            <button
+              style={{
+                padding: '8px 24px',
+                borderRadius: '8px',
+                backgroundColor: 'transparent',
+                color: '#6b7280',
+                fontWeight: '500',
+                fontSize: '14px',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              Premium
+            </button>
+          </div>
+        </div>
+
+        <AdSlotGrid />
+      </div>
     </div>
   );
 }

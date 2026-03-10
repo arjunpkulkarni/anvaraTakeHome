@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAdSlots } from '@/lib/api';
-import { GridSkeleton } from '@/app/components/ui';
+import { GridSkeleton, Pagination, EmptyState, ErrorState, Card, CardContent } from '@/app/components/ui';
 
 const typeColors: Record<string, string> = {
   DISPLAY: 'bg-blue-100 text-blue-700',
@@ -25,17 +25,42 @@ interface AdSlot {
   };
 }
 
+const ITEMS_PER_PAGE = 9;
+
 export function AdSlotGrid() {
-  const [adSlots, setAdSlots] = useState<AdSlot[]>([]);
+  const [allAdSlots, setAllAdSlots] = useState<AdSlot[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const loadAdSlots = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await getAdSlots();
+      setAllAdSlots(data);
+    } catch {
+      setError('Failed to load ad slots. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    getAdSlots()
-      .then(setAdSlots)
-      .catch(() => setError('Failed to load ad slots'))
-      .finally(() => setLoading(false));
+    loadAdSlots();
   }, []);
+
+  // Pagination logic
+  const totalPages = Math.ceil(allAdSlots.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentAdSlots = allAdSlots.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Scroll to top smoothly
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   if (loading) {
     return <GridSkeleton count={6} />;
@@ -43,104 +68,132 @@ export function AdSlotGrid() {
 
   if (error) {
     return (
-      <motion.div
-        className="rounded border border-red-200 bg-red-50 p-4 text-red-600"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        {error}
-      </motion.div>
+      <ErrorState
+        message={error}
+        onRetry={loadAdSlots}
+      />
     );
   }
 
-  if (adSlots.length === 0) {
+  if (allAdSlots.length === 0) {
     return (
-      <motion.div
-        className="rounded-lg border border-dashed border-[--color-border] p-12 text-center text-[--color-muted]"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3 }}
-      >
-        No ad slots available at the moment.
-      </motion.div>
+      <EmptyState
+        icon="🏪"
+        title="No ad slots available"
+        description="Check back soon! Publishers are constantly adding new advertising opportunities."
+      />
     );
   }
 
   return (
-    <motion.div
-      className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-      initial="initial"
-      animate="animate"
-      variants={{
-        initial: {},
-        animate: {
-          transition: {
-            staggerChildren: 0.05,
+    <div>
+      <motion.div
+        className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+        initial="initial"
+        animate="animate"
+        variants={{
+          initial: {},
+          animate: {
+            transition: {
+              staggerChildren: 0.05,
+            },
           },
-        },
-      }}
-    >
-      <AnimatePresence mode="popLayout">
-        {adSlots.map((slot, index) => (
-          <motion.div
-            key={slot.id}
-            variants={{
-              initial: { opacity: 0, y: 20 },
-              animate: { opacity: 1, y: 0 },
-            }}
-            transition={{
-              duration: 0.3,
-              delay: index * 0.05,
-              ease: [0.19, 1, 0.22, 1],
-            }}
-            whileHover={{ y: -4 }}
-          >
-            <Link
-              href={`/marketplace/${slot.id}`}
-              className="block rounded-lg border border-[--color-border] p-4 transition-all duration-200 hover:shadow-md h-full"
+        }}
+      >
+        <AnimatePresence mode="popLayout">
+          {currentAdSlots.map((slot, index) => (
+            <motion.div
+              key={`${slot.id}-${currentPage}`}
+              variants={{
+                initial: { opacity: 0, y: 20 },
+                animate: { opacity: 1, y: 0 },
+              }}
+              transition={{
+                duration: 0.3,
+                delay: index * 0.05,
+                ease: [0.19, 1, 0.22, 1],
+              }}
             >
-              <div className="mb-2 flex items-start justify-between">
-                <h3 className="font-semibold">{slot.name}</h3>
-                <motion.span
-                  className={`rounded px-2 py-0.5 text-xs ${typeColors[slot.type] || 'bg-gray-100'}`}
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {slot.type}
-                </motion.span>
-              </div>
+              <Link href={`/marketplace/${slot.id}`} className="block h-full">
+                <Card hover animate className="h-full">
+                  <CardContent>
+                    {/* Header with title and type badge */}
+                    <div className="mb-3 flex items-start justify-between">
+                      <h3 className="text-lg font-semibold text-[var(--color-text-primary)] line-clamp-1">
+                        {slot.name}
+                      </h3>
+                      <motion.span
+                        className={`rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap ml-2 ${
+                          typeColors[slot.type] || 'bg-gray-100 text-gray-700'
+                        }`}
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {slot.type}
+                      </motion.span>
+                    </div>
 
-              {slot.publisher && (
-                <p className="mb-2 text-sm text-[--color-muted]">by {slot.publisher.name}</p>
-              )}
+                    {/* Publisher info */}
+                    {slot.publisher && (
+                      <p className="mb-3 text-sm text-[var(--color-text-secondary)]">
+                        by <span className="font-medium">{slot.publisher.name}</span>
+                      </p>
+                    )}
 
-              {slot.description && (
-                <p className="mb-3 text-sm text-[--color-muted] line-clamp-2">{slot.description}</p>
-              )}
+                    {/* Description */}
+                    {slot.description && (
+                      <p className="mb-4 text-sm text-[var(--color-text-secondary)] line-clamp-2">
+                        {slot.description}
+                      </p>
+                    )}
 
-              <div className="flex items-center justify-between">
-                <motion.span
-                  className={`text-sm ${slot.isAvailable ? 'text-green-600' : 'text-[--color-muted]'}`}
-                  animate={{
-                    scale: slot.isAvailable ? [1, 1.1, 1] : 1,
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: slot.isAvailable ? Infinity : 0,
-                    ease: 'easeInOut',
-                  }}
-                >
-                  {slot.isAvailable ? 'Available' : 'Booked'}
-                </motion.span>
-                <span className="font-semibold text-[--color-primary]">
-                  ${Number(slot.basePrice).toLocaleString()}/mo
-                </span>
-              </div>
-            </Link>
-          </motion.div>
-        ))}
-      </AnimatePresence>
-    </motion.div>
+                    {/* Footer with availability and price */}
+                    <div className="flex items-center justify-between pt-3 border-t border-[var(--color-border)]">
+                      <motion.div
+                        className="flex items-center gap-2"
+                        animate={{
+                          scale: slot.isAvailable ? [1, 1.05, 1] : 1,
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: slot.isAvailable ? Infinity : 0,
+                          ease: 'easeInOut',
+                        }}
+                      >
+                        <div
+                          className={`w-2 h-2 rounded-full ${
+                            slot.isAvailable ? 'bg-green-500' : 'bg-gray-400'
+                          }`}
+                        />
+                        <span
+                          className={`text-sm font-medium ${
+                            slot.isAvailable ? 'text-green-600' : 'text-[var(--color-text-secondary)]'
+                          }`}
+                        >
+                          {slot.isAvailable ? 'Available' : 'Booked'}
+                        </span>
+                      </motion.div>
+                      <span className="text-lg font-semibold text-[var(--color-primary)]">
+                        ${Number(slot.basePrice).toLocaleString()}
+                        <span className="text-sm font-normal text-[var(--color-text-secondary)]">/mo</span>
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* Pagination */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        totalItems={allAdSlots.length}
+        itemsPerPage={ITEMS_PER_PAGE}
+        onPageChange={handlePageChange}
+      />
+    </div>
   );
 }

@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png',
   },
-  manifest: '/site.webmanifest',
+  // manifest: '/site.webmanifest', // Optional: add if you create a manifest file
   
   // Additional metadata
   robots: {
