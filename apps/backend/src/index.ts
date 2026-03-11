@@ -45,6 +45,11 @@ app.listen(PORT, () => {
   console.log('    POST   /api/placements');
   console.log('  Dashboard:');
   console.log('    GET    /api/dashboard/stats');
+  console.log('  Newsletter:');
+  console.log('    POST   /api/newsletter/subscribe');
+  console.log('  Quotes:');
+  console.log('    POST   /api/quotes/request');
+  console.log('    GET    /api/quotes/:quoteId');
   console.log('  Health:');
   console.log('    GET    /api/health');
   console.log('');

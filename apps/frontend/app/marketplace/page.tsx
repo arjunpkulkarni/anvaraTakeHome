@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { AdSlotGrid } from './components/ad-slot-grid';
+import { NewsletterSignup } from '../components/newsletter-signup';
+import { CustomButton } from '../components/custom-button';
 
 type FilterType = 'all' | 'available' | 'premium';
 
@@ -68,59 +70,34 @@ export default function MarketplacePage() {
 
         {/* Filter Tabs */}
         <div style={{ marginBottom: '32px' }}>
-          <div style={{ display: 'inline-flex', backgroundColor: 'white', borderRadius: '12px', padding: '4px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
-            <button
+          <div style={{ display: 'inline-flex', backgroundColor: 'white', borderRadius: '12px', padding: '4px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', gap: '4px' }}>
+            <CustomButton
+              variant={filter === 'all' ? 'primary' : 'ghost'}
+              size="sm"
               onClick={() => setFilter('all')}
-              style={{
-                padding: '8px 24px',
-                borderRadius: '8px',
-                backgroundColor: filter === 'all' ? 'white' : 'transparent',
-                color: filter === 'all' ? '#111827' : '#6b7280',
-                fontWeight: '500',
-                fontSize: '14px',
-                border: 'none',
-                cursor: 'pointer',
-                boxShadow: filter === 'all' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
-                transition: 'all 0.2s',
-              }}
             >
               All
-            </button>
-            <button
+            </CustomButton>
+            <CustomButton
+              variant={filter === 'available' ? 'primary' : 'ghost'}
+              size="sm"
               onClick={() => setFilter('available')}
-              style={{
-                padding: '8px 24px',
-                borderRadius: '8px',
-                backgroundColor: filter === 'available' ? 'white' : 'transparent',
-                color: filter === 'available' ? '#111827' : '#6b7280',
-                fontWeight: '500',
-                fontSize: '14px',
-                border: 'none',
-                cursor: 'pointer',
-                boxShadow: filter === 'available' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
-                transition: 'all 0.2s',
-              }}
             >
               Available
-            </button>
-            <button
+            </CustomButton>
+            <CustomButton
+              variant={filter === 'premium' ? 'primary' : 'ghost'}
+              size="sm"
               onClick={() => setFilter('premium')}
-              style={{
-                padding: '8px 24px',
-                borderRadius: '8px',
-                backgroundColor: filter === 'premium' ? 'white' : 'transparent',
-                color: filter === 'premium' ? '#111827' : '#6b7280',
-                fontWeight: '500',
-                fontSize: '14px',
-                border: 'none',
-                cursor: 'pointer',
-                boxShadow: filter === 'premium' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
-                transition: 'all 0.2s',
-              }}
             >
               Premium
-            </button>
+            </CustomButton>
           </div>
+        </div>
+
+        {/* Newsletter Signup - Strategic placement before listings */}
+        <div style={{ marginBottom: '32px' }}>
+          <NewsletterSignup placement="marketplace_top" />
         </div>
 
         <AdSlotGrid filter={filter} />

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getAdSlot } from '@/lib/api';
 import { authClient } from '@/auth-client';
+import { QuoteRequestModal } from '@/app/components/quote-request-modal';
 
 interface AdSlot {
   id: string;
@@ -74,6 +75,7 @@ export function AdSlotDetail({ id }: Props) {
   const [booking, setBooking] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [bookingError, setBookingError] = useState<string | null>(null);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   useEffect(() => {
     // Fetch ad slot
@@ -440,9 +442,10 @@ export function AdSlotDetail({ id }: Props) {
 
                   <button
                     type="button"
+                    onClick={() => setIsQuoteModalOpen(true)}
                     className="inline-flex items-center justify-center rounded-xl border-2 border-indigo-400 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
                   >
-                    Save for Later
+                    Request Custom Quote
                   </button>
                 </div>
 
@@ -818,6 +821,15 @@ export function AdSlotDetail({ id }: Props) {
           </div>
         </section>
       </div>
+
+      {/* Quote Request Modal */}
+      <QuoteRequestModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
+        adSlot={adSlot}
+        userEmail={user?.email}
+        userName={roleInfo?.name || user?.name}
+      />
     </main>
   );
 }
