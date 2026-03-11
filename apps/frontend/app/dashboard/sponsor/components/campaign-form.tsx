@@ -28,9 +28,13 @@ function SubmitButton({ isEdit }: { isEdit: boolean }) {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="submit" disabled={pending} fullWidth>
+    <button
+      type="submit"
+      disabled={pending}
+      className="w-full inline-flex items-center justify-center rounded-lg bg-black px-4 py-2 text-base font-medium text-white transition-colors duration-200 hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none"
+    >
       {pending ? 'Saving...' : isEdit ? 'Update Campaign' : 'Create Campaign'}
-    </Button>
+    </button>
   );
 }
 

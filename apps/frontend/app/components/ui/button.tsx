@@ -20,7 +20,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         'border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-background-secondary)]',
       ghost: 'text-[var(--color-text-secondary)] hover:bg-[var(--color-background-secondary)]',
       danger: 'bg-[var(--color-error)] text-white hover:bg-red-600',
-      dark: 'bg-gray-900 text-white hover:bg-gray-800',
+      dark: 'bg-zinc-950 text-white hover:bg-zinc-800',
     };
 
     const sizes = {
