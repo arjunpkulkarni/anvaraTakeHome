@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { AdSlotGrid } from './components/ad-slot-grid';
 import { NewsletterSignup } from '../components/newsletter-signup';
-import { CustomButton } from '../components/custom-button';
+import { FilterBar } from '../components/filter-bar';
 
 type FilterType = 'all' | 'available' | 'premium';
 
@@ -68,32 +68,12 @@ export default function MarketplacePage() {
           </div>
         </div>
 
-        {/* Filter Tabs */}
-        <div style={{ marginBottom: '32px' }}>
-          <div style={{ display: 'inline-flex', backgroundColor: 'white', borderRadius: '12px', padding: '4px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', gap: '4px' }}>
-            <CustomButton
-              variant={filter === 'all' ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => setFilter('all')}
-            >
-              All
-            </CustomButton>
-            <CustomButton
-              variant={filter === 'available' ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => setFilter('available')}
-            >
-              Available
-            </CustomButton>
-            <CustomButton
-              variant={filter === 'premium' ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => setFilter('premium')}
-            >
-              Premium
-            </CustomButton>
-          </div>
-        </div>
+        {/* Tab Filters */}
+        <FilterBar
+          filters={['all', 'available', 'premium'] as const}
+          activeFilter={filter}
+          onFilterChange={setFilter}
+        />
 
         {/* Newsletter Signup - Strategic placement before listings */}
         <div style={{ marginBottom: '32px' }}>

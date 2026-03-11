@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { CampaignList } from './campaign-list';
 import { CreateCampaignButton } from './create-campaign-button';
-import { CustomButton } from '@/app/components/custom-button';
+import { FilterBar } from '@/app/components/filter-bar';
 
 interface Campaign {
   id: string;
@@ -50,38 +50,11 @@ export function SponsorDashboardClient({ campaigns }: SponsorDashboardClientProp
         </div>
 
         {/* Tab Filters */}
-        <div style={{ marginBottom: '32px' }}>
-          <div style={{ display: 'inline-flex', backgroundColor: 'white', borderRadius: '12px', padding: '4px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', gap: '4px' }}>
-            <CustomButton
-              variant={filter === 'all' ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => setFilter('all')}
-            >
-              All
-            </CustomButton>
-            <CustomButton
-              variant={filter === 'active' ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => setFilter('active')}
-            >
-              Active
-            </CustomButton>
-            <CustomButton
-              variant={filter === 'draft' ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => setFilter('draft')}
-            >
-              Draft
-            </CustomButton>
-            <CustomButton
-              variant={filter === 'completed' ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => setFilter('completed')}
-            >
-              Completed
-            </CustomButton>
-          </div>
-        </div>
+        <FilterBar
+          filters={['all', 'active', 'draft', 'completed'] as const}
+          activeFilter={filter}
+          onFilterChange={setFilter}
+        />
 
         <CampaignList campaigns={filteredCampaigns} />
       </div>
