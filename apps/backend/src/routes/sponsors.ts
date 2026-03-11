@@ -73,7 +73,40 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
-// TODO: Add PUT /api/sponsors/:id endpoint
-// Update sponsor details
+// PUT /api/sponsors/:id - Update sponsor details
+router.put('/:id', async (req: Request, res: Response) => {
+  try {
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const { name, email, website, logo, description, industry } = req.body;
+
+    // Check if sponsor exists
+    const existingSponsor = await prisma.sponsor.findUnique({
+      where: { id },
+    });
+
+    if (!existingSponsor) {
+      res.status(404).json({ error: 'Sponsor not found' });
+      return;
+    }
+
+    // Update sponsor
+    const updatedSponsor = await prisma.sponsor.update({
+      where: { id },
+      data: {
+        ...(name !== undefined && { name }),
+        ...(email !== undefined && { email }),
+        ...(website !== undefined && { website }),
+        ...(logo !== undefined && { logo }),
+        ...(description !== undefined && { description }),
+        ...(industry !== undefined && { industry }),
+      },
+    });
+
+    res.json(updatedSponsor);
+  } catch (error) {
+    console.error('Error updating sponsor:', error);
+    res.status(500).json({ error: 'Failed to update sponsor' });
+  }
+});
 
 export default router;

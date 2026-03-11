@@ -3,6 +3,7 @@ import { DM_Sans } from 'next/font/google';
 import './globals.css';
 import { Nav } from './components/nav';
 import { ToastProvider } from './components/ui';
+import { ErrorBoundary } from './components/error-boundary';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -10,9 +11,6 @@ const dmSans = DM_Sans({
   display: 'swap',
   variable: '--font-dm-sans',
 });
-
-// TODO: Add ErrorBoundary wrapper for graceful error handling
-// TODO: Consider adding a loading.tsx for Suspense boundaries
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anvara.com';
 const siteName = 'Anvara';
@@ -108,13 +106,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" href="/favicon.png" />
       </head>
       <body className="min-h-screen antialiased">
-        <ToastProvider>
-          <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--color-primary)] focus:text-white focus:rounded">
-            Skip to main content
-          </a>
-          <Nav />
-          <main id="main-content">{children}</main>
-        </ToastProvider>
+        <ErrorBoundary>
+          <ToastProvider>
+            <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-(--color-primary) focus:text-white focus:rounded">
+              Skip to main content
+            </a>
+            <Nav />
+            <main id="main-content">{children}</main>
+          </ToastProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );
