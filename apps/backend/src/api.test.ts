@@ -13,6 +13,31 @@ let testCreativeId: string;
 describe('API Tests', () => {
   // Setup: Create test data before all tests
   beforeAll(async () => {
+    // Clean up any existing test data first
+    await prisma.placement.deleteMany({
+      where: {
+        OR: [
+          { campaign: { sponsor: { email: 'sponsor@test.com' } } },
+          { publisher: { email: 'publisher@test.com' } },
+        ],
+      },
+    });
+    await prisma.creative.deleteMany({
+      where: { campaign: { sponsor: { email: 'sponsor@test.com' } } },
+    });
+    await prisma.campaign.deleteMany({
+      where: { sponsor: { email: 'sponsor@test.com' } },
+    });
+    await prisma.adSlot.deleteMany({
+      where: { publisher: { email: 'publisher@test.com' } },
+    });
+    await prisma.publisher.deleteMany({
+      where: { email: 'publisher@test.com' },
+    });
+    await prisma.sponsor.deleteMany({
+      where: { email: 'sponsor@test.com' },
+    });
+
     // Create a test sponsor
     const sponsor = await prisma.sponsor.create({
       data: {

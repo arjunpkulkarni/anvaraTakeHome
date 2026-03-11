@@ -39,7 +39,7 @@ router.post('/request', async (req: Request, res: Response) => {
 
     // Validate phone if provided
     if (phone) {
-      const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+      const phoneRegex = /^[\d\s\-+()]+$/;
       if (!phoneRegex.test(phone) || phone.length < 10) {
         return res.status(400).json({
           success: false,
