@@ -117,11 +117,13 @@ export function Pagination({
                 key={pageNum}
                 onClick={() => onPageChange(pageNum)}
                 disabled={isLoading}
+                style={{
+                  backgroundColor: isActive ? '#2563eb' : 'transparent',
+                  color: isActive ? 'white' : '#374151',
+                }}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors min-w-[44px] min-h-[44px] ${
-                  isActive
-                    ? 'bg-blue-600 text-white'
-                    : 'text-gray-700 hover:bg-gray-100 disabled:opacity-50'
-                }`}
+                  !isActive && 'hover:bg-gray-100'
+                } ${isLoading && 'disabled:opacity-50'}`}
                 whileHover={!isActive && !isLoading ? { scale: 1.05 } : {}}
                 whileTap={!isActive && !isLoading ? { scale: 0.95 } : {}}
                 aria-label={`Page ${pageNum}`}
