@@ -6,13 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { getAdSlots } from '@/lib/api';
 import { GridSkeleton, Pagination, EmptyState, ErrorState } from '@/app/components/ui';
 
-const typeColors: Record<string, string> = {
-  DISPLAY: 'bg-blue-100 text-blue-700',
-  VIDEO: 'bg-red-100 text-red-700',
-  NEWSLETTER: 'bg-purple-100 text-purple-700',
-  PODCAST: 'bg-orange-100 text-orange-700',
-};
-
 interface AdSlot {
   id: string;
   name: string;
