@@ -4,7 +4,7 @@ import './globals.css';
 import { Nav } from './components/nav';
 import { ToastProvider } from './components/ui';
 
-const dmSans = DM_Sans({ 
+const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   display: 'swap',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Anvara' }],
   creator: 'Anvara',
   metadataBase: new URL(siteUrl),
-  
+
   // Open Graph metadata for social media sharing
   openGraph: {
     type: 'website',
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
+
   // Twitter Card metadata
   twitter: {
     card: 'summary_large_image',
@@ -64,15 +64,13 @@ export const metadata: Metadata = {
     creator: '@anvara',
     site: '@anvara',
   },
-  
+
   // Icons and manifest
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    icon: '/favicon.png',
   },
   // manifest: '/site.webmanifest', // Optional: add if you create a manifest file
-  
+
   // Additional metadata
   robots: {
     index: true,
@@ -85,7 +83,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  
+
   // Verification tags (add your actual verification codes)
   // verification: {
   //   google: 'your-google-verification-code',
@@ -107,6 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={dmSans.variable}>
       <head>
         <link rel="canonical" href={siteUrl} />
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </head>
       <body className="min-h-screen antialiased">
         <ToastProvider>

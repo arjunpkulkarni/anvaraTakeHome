@@ -7,7 +7,7 @@ import {
 } from './landing/components';
 
 export const metadata: Metadata = {
-  title: 'Home',
+  title: 'Anvara',
   description:
     'The modern sponsorship marketplace for creators. Connect sponsors with publishers, launch campaigns, and grow your business with our powerful advertising platform.',
   openGraph: {
