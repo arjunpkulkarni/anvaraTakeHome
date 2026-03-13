@@ -126,8 +126,7 @@ router.post('/', requireAuth, async (req: AuthRequest, res: Response) => {
   }
 });
 
-// POST /api/ad-slots/:id/book - Book an ad slot (simplified booking flow)
-// This marks the slot as unavailable and creates a simple booking record
+// POST /api/ad-slots/:id/book - Book an ad slot and create campaign
 router.post('/:id/book', requireAuth, async (req: AuthRequest, res: Response) => {
   try {
     if (!req.user?.sponsorId) {
@@ -154,23 +153,78 @@ router.post('/:id/book', requireAuth, async (req: AuthRequest, res: Response) =>
       return;
     }
 
-    // Mark slot as unavailable
-    const updatedSlot = await prisma.adSlot.update({
-      where: { id },
-      data: { isAvailable: false },
-      include: {
-        publisher: { select: { id: true, name: true } },
-      },
+    // Create campaign, creative, and placement in a transaction
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. Create campaign
+      const startDate = new Date();
+      const endDate = new Date();
+      endDate.setMonth(endDate.getMonth() + 1); // Default 1 month campaign
+
+      const campaign = await tx.campaign.create({
+        data: {
+          name: `${adSlot.name} Campaign`,
+          description: message || `Campaign for ${adSlot.name}`,
+          budget: adSlot.basePrice,
+          spent: 0,
+          startDate,
+          endDate,
+          targetCategories: [],
+          targetRegions: [],
+          status: 'PENDING_REVIEW',
+          sponsorId: req.user!.sponsorId!,
+        },
+      });
+
+      // 2. Create creative (placeholder)
+      const creative = await tx.creative.create({
+        data: {
+          name: `${adSlot.name} Creative`,
+          type: adSlot.type === 'PODCAST' ? 'PODCAST_READ' : 
+                adSlot.type === 'VIDEO' ? 'VIDEO' : 
+                adSlot.type === 'NEWSLETTER' ? 'SPONSORED_POST' : 'NATIVE',
+          assetUrl: 'https://placeholder.com/creative',
+          clickUrl: 'https://example.com',
+          altText: `Creative for ${adSlot.name}`,
+          isApproved: false,
+          campaignId: campaign.id,
+        },
+      });
+
+      // 3. Create placement
+      const placement = await tx.placement.create({
+        data: {
+          campaignId: campaign.id,
+          creativeId: creative.id,
+          adSlotId: adSlot.id,
+          publisherId: adSlot.publisherId,
+          agreedPrice: adSlot.basePrice,
+          pricingModel: 'FLAT_RATE',
+          startDate,
+          endDate,
+          status: 'PENDING',
+        },
+      });
+
+      // 4. Mark slot as unavailable
+      const updatedSlot = await tx.adSlot.update({
+        where: { id },
+        data: { isAvailable: false },
+        include: {
+          publisher: { select: { id: true, name: true } },
+        },
+      });
+
+      return { campaign, placement, updatedSlot };
     });
 
-    // In a real app, you'd create a Placement record here
-    // For now, we just mark it as booked
-    console.log(`Ad slot ${id} booked by sponsor ${req.user.sponsorId}. Message: ${message || 'None'}`);
+    console.log(`Ad slot ${id} booked by sponsor ${req.user.sponsorId}. Campaign created: ${result.campaign.id}`);
 
     res.json({
       success: true,
-      message: 'Ad slot booked successfully!',
-      adSlot: updatedSlot,
+      message: 'Ad slot booked successfully! Campaign created.',
+      adSlot: result.updatedSlot,
+      campaign: result.campaign,
+      placement: result.placement,
     });
   } catch (error) {
     console.error('Error booking ad slot:', error);
@@ -204,9 +258,30 @@ router.post('/:id/unbook', requireAuth, async (req: AuthRequest, res: Response) 
       return;
     }
 
-    const updatedSlot = await prisma.adSlot.update({
+    // Delete associated placements, creatives, and campaigns in a transaction
+    await prisma.$transaction(async (tx) => {
+      // Find all placements for this ad slot
+      const placements = await tx.placement.findMany({
+        where: { adSlotId: id },
+        include: { campaign: true, creative: true },
+      });
+
+      // Delete placements, creatives, and campaigns
+      for (const placement of placements) {
+        await tx.placement.delete({ where: { id: placement.id } });
+        await tx.creative.delete({ where: { id: placement.creativeId } });
+        await tx.campaign.delete({ where: { id: placement.campaignId } });
+      }
+
+      // Mark slot as available
+      await tx.adSlot.update({
+        where: { id },
+        data: { isAvailable: true },
+      });
+    });
+
+    const updatedSlot = await prisma.adSlot.findUnique({
       where: { id },
-      data: { isAvailable: true },
       include: {
         publisher: { select: { id: true, name: true } },
       },

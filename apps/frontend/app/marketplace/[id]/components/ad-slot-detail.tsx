@@ -94,7 +94,8 @@ export function AdSlotDetail({ id }: Props) {
 
           // Fetch role info from backend
           fetch(
-            `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291'}/api/auth/role/${sessionUser.id}`
+            `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291'}/api/auth/role/${sessionUser.id}`,
+            { credentials: 'include' }
           )
             .then((res) => res.json())
             .then((data) => setRoleInfo(data))
@@ -119,6 +120,7 @@ export function AdSlotDetail({ id }: Props) {
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify({
             sponsorId: roleInfo.sponsorId,
             message: message || undefined,
@@ -149,6 +151,7 @@ export function AdSlotDetail({ id }: Props) {
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
         }
       );
 
@@ -741,13 +744,43 @@ export function AdSlotDetail({ id }: Props) {
                           type="button"
                   onClick={handleBooking}
                           disabled={booking || !adSlot.isAvailable}
-                          className="inline-flex w-full items-center justify-center rounded-xl bg-linear-to-r from-indigo-600 to-purple-600 px-6 py-4 text-base font-bold text-white shadow-lg transition hover:from-indigo-700 hover:to-purple-700 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-lg transform hover:-translate-y-0.5"
+                          style={{
+                            display: 'inline-flex',
+                            width: '100%',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: '12px',
+                            background: booking || !adSlot.isAvailable ? '#93c5fd' : 'linear-gradient(to right, #4f46e5, #7c3aed)',
+                            padding: '16px 24px',
+                            fontSize: '16px',
+                            fontWeight: '700',
+                            color: '#ffffff',
+                            border: 'none',
+                            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                            transition: 'all 0.2s',
+                            cursor: booking || !adSlot.isAvailable ? 'not-allowed' : 'pointer',
+                            opacity: booking || !adSlot.isAvailable ? 0.5 : 1,
+                          }}
+                          onMouseEnter={(e) => {
+                            if (!booking && adSlot.isAvailable) {
+                              e.currentTarget.style.background = 'linear-gradient(to right, #4338ca, #6d28d9)';
+                              e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+                              e.currentTarget.style.transform = 'translateY(-2px)';
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            if (!booking && adSlot.isAvailable) {
+                              e.currentTarget.style.background = 'linear-gradient(to right, #4f46e5, #7c3aed)';
+                              e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+                              e.currentTarget.style.transform = 'translateY(0)';
+                            }
+                          }}
                 >
                           {booking ? (
                             <>
-                              <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                              <svg style={{ animation: 'spin 1s linear infinite', marginLeft: '-4px', marginRight: '8px', height: '16px', width: '16px', color: 'white' }} fill="none" viewBox="0 0 24 24">
+                                <circle style={{ opacity: 0.25 }} cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                <path style={{ opacity: 0.75 }} fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                               </svg>
                               Sending Request...
                             </>

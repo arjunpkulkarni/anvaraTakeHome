@@ -4,7 +4,7 @@ import { useState, useTransition } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { deleteCampaign, updateCampaignStatus } from '../actions';
 import { CampaignForm } from './campaign-form';
-import { Button, Card, CardContent } from '@/app/components/ui';
+import { Card, CardContent } from '@/app/components/ui';
 import { useToast } from '@/app/components/ui';
 
 interface CampaignCardProps {
@@ -22,9 +22,19 @@ interface CampaignCardProps {
 
 const statusColors: Record<string, string> = {
   DRAFT: 'bg-gray-100 text-gray-600',
+  PENDING_REVIEW: 'bg-amber-100 text-amber-700',
+  APPROVED: 'bg-indigo-100 text-indigo-700',
   ACTIVE: 'bg-green-100 text-green-700',
   PAUSED: 'bg-yellow-100 text-yellow-700',
   COMPLETED: 'bg-blue-100 text-blue-700',
+  CANCELLED: 'bg-red-100 text-red-700',
+};
+
+const formatStatus = (status: string): string => {
+  return status
+    .split('_')
+    .map(word => word.charAt(0) + word.slice(1).toLowerCase())
+    .join(' ');
 };
 
 export function CampaignCard({ campaign }: CampaignCardProps) {
@@ -144,7 +154,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {campaign.status}
+                  {formatStatus(campaign.status)}
                 </motion.span>
               </div>
 
@@ -193,18 +203,101 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-2 pt-3 border-t border-gray-100">
-                <Button onClick={() => setIsEditing(true)} disabled={isPending} variant="secondary" size="sm" className="flex-1">
+              <div style={{ display: 'flex', gap: '8px', paddingTop: '16px', borderTop: '1px solid #f3f4f6' }}>
+                <button
+                  onClick={() => setIsEditing(true)}
+                  disabled={isPending}
+                  style={{
+                    flex: 1,
+                    padding: '8px 16px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    borderRadius: '8px',
+                    border: '1px solid #e5e7eb',
+                    backgroundColor: '#ffffff',
+                    color: '#374151',
+                    cursor: isPending ? 'not-allowed' : 'pointer',
+                    transition: 'all 0.2s',
+                    opacity: isPending ? 0.6 : 1,
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isPending) {
+                      e.currentTarget.style.backgroundColor = '#f9fafb';
+                      e.currentTarget.style.borderColor = '#d1d5db';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isPending) {
+                      e.currentTarget.style.backgroundColor = '#ffffff';
+                      e.currentTarget.style.borderColor = '#e5e7eb';
+                    }
+                  }}
+                >
                   Edit
-                </Button>
+                </button>
                 {(campaign.status === 'ACTIVE' || campaign.status === 'PAUSED') && (
-                  <Button onClick={handleToggleStatus} disabled={isPending} variant="secondary" size="sm" className="flex-1">
+                  <button
+                    onClick={handleToggleStatus}
+                    disabled={isPending}
+                    style={{
+                      flex: 1,
+                      padding: '8px 16px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      borderRadius: '8px',
+                      border: '1px solid #e5e7eb',
+                      backgroundColor: '#ffffff',
+                      color: '#374151',
+                      cursor: isPending ? 'not-allowed' : 'pointer',
+                      transition: 'all 0.2s',
+                      opacity: isPending ? 0.6 : 1,
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isPending) {
+                        e.currentTarget.style.backgroundColor = '#f9fafb';
+                        e.currentTarget.style.borderColor = '#d1d5db';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isPending) {
+                        e.currentTarget.style.backgroundColor = '#ffffff';
+                        e.currentTarget.style.borderColor = '#e5e7eb';
+                      }
+                    }}
+                  >
                     {isPending ? '...' : campaign.status === 'ACTIVE' ? 'Pause' : 'Activate'}
-                  </Button>
+                  </button>
                 )}
-                <Button onClick={handleDelete} disabled={isPending} variant="danger" size="sm">
+                <button
+                  onClick={handleDelete}
+                  disabled={isPending}
+                  style={{
+                    padding: '8px 16px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    borderRadius: '8px',
+                    border: '1px solid #fecaca',
+                    backgroundColor: '#ffffff',
+                    color: '#dc2626',
+                    cursor: isPending ? 'not-allowed' : 'pointer',
+                    transition: 'all 0.2s',
+                    opacity: isPending ? 0.6 : 1,
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isPending) {
+                      e.currentTarget.style.backgroundColor = '#fef2f2';
+                      e.currentTarget.style.borderColor = '#fca5a5';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isPending) {
+                      e.currentTarget.style.backgroundColor = '#ffffff';
+                      e.currentTarget.style.borderColor = '#fecaca';
+                    }
+                  }}
+                >
                   {isPending ? '...' : 'Delete'}
-                </Button>
+                </button>
               </div>
             </CardContent>
           </Card>

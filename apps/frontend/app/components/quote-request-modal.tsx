@@ -88,6 +88,7 @@ export function QuoteRequestModal({ isOpen, onClose, adSlot, userEmail, userName
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({
           ...formData,
           adSlotId: adSlot.id,

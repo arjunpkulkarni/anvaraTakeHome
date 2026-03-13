@@ -152,10 +152,13 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
                 className="block h-full group"
                 onClick={() => trackMarketplaceEvent.viewAdSlot(slot.id, slot.name)}
               >
-                <motion.div
-                  className="relative h-full bg-white border border-gray-200 rounded-xl overflow-hidden transition-all duration-200 hover:border-indigo-300 hover:shadow-lg"
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.2 }}
+                <div
+                  className="relative bg-white border border-gray-200 rounded-xl overflow-hidden transition-all duration-200 hover:border-indigo-300 hover:shadow-lg"
+                  style={{ 
+                    height: '380px',
+                    display: 'flex',
+                    flexDirection: 'column'
+                  }}
                 >
                   {/* Availability Badge - Prominent if available */}
                   {slot.isAvailable && (
@@ -175,7 +178,7 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
                     </div>
                   )}
 
-                  <div className="p-6">
+                  <div className="p-6" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                     {/* Type Badge */}
                     <div className="mb-3">
                       <span className={`inline-block text-[10px] font-semibold px-2.5 py-1 rounded-md uppercase tracking-wider ${
@@ -190,7 +193,7 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
                     </div>
 
                     {/* Title - More prominent */}
-                    <h3 className="text-[17px] font-bold text-gray-900 mb-2 line-clamp-2 leading-tight group-hover:text-indigo-600 transition-colors">
+                    <h3 className="text-[17px] font-bold text-gray-900 mb-2 leading-tight group-hover:text-indigo-600 transition-colors" style={{ minHeight: '48px' }}>
                       {slot.name}
                     </h3>
 
@@ -207,14 +210,16 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
                     )}
 
                     {/* Description */}
-                    {slot.description && (
-                      <p className="text-[12px] text-gray-600 line-clamp-2 leading-relaxed">
-                        {slot.description}
-                      </p>
-                    )}
+                    <div style={{ minHeight: '40px', marginBottom: '16px' }}>
+                      {slot.description && (
+                        <p className="text-[12px] text-gray-600 line-clamp-2 leading-relaxed">
+                          {slot.description}
+                        </p>
+                      )}
+                    </div>
 
                     {/* Price Section - More prominent */}
-                    <div className="pt-4 mt-5 border-t border-gray-200">
+                    <div className="pt-4 mt-auto border-t border-gray-200">
                       <div className="flex items-end justify-between">
                         <div>
                           <div className="text-[11px] text-gray-500 mb-0.5">Starting at</div>
@@ -227,9 +232,18 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
                         </div>
 
                         {/* CTA indicator */}
-                        <div className="flex items-center gap-1.5 text-indigo-600 group-hover:gap-2.5 transition-all">
-                          <span className="text-[12px] font-semibold">View</span>
-                          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <div 
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            color: '#4f46e5',
+                            transition: 'gap 0.2s ease-in-out'
+                          }}
+                          className="group-hover:gap-3"
+                        >
+                          <span style={{ fontSize: '13px', fontWeight: '700' }}>View</span>
+                          <svg style={{ width: '16px', height: '16px' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                           </svg>
                         </div>
@@ -237,13 +251,34 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
                     </div>
 
                     {/* Hover CTA overlay */}
-                    <div className="absolute inset-x-0 bottom-0 h-0 bg-gradient-to-t from-indigo-600 to-indigo-500 opacity-0 group-hover:h-14 group-hover:opacity-100 transition-all duration-200 flex items-center justify-center">
-                      <span className="text-white font-semibold text-[13px] translate-y-4 group-hover:translate-y-0 transition-transform duration-200">
-                        View Details & Book →
+                    <div 
+                      className="absolute inset-x-0 bottom-0 h-0 opacity-0 group-hover:h-14 group-hover:opacity-100 transition-all duration-200 flex items-center justify-center"
+                      style={{
+                        background: 'linear-gradient(to top, #4f46e5 0%, #6366f1 100%)',
+                        backdropFilter: 'blur(4px)'
+                      }}
+                    >
+                      <span 
+                        style={{
+                          color: '#ffffff',
+                          fontWeight: '700',
+                          fontSize: '14px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          transform: 'translateY(16px)',
+                          transition: 'transform 0.2s ease-in-out'
+                        }}
+                        className="group-hover:translate-y-0"
+                      >
+                        View Details & Book
+                        <svg style={{ width: '20px', height: '20px' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
                       </span>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </Link>
             </motion.div>
           ))}

@@ -43,6 +43,7 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({ email, placement }),
       });
 
