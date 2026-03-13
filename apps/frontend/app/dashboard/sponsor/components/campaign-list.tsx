@@ -25,13 +25,6 @@ export function CampaignList({ campaigns }: CampaignListProps) {
         icon="📢"
         title="No campaigns yet"
         description="Create your first campaign to start reaching your target audience and growing your business."
-        action={{
-          label: 'Create Your First Campaign',
-          onClick: () => {
-            // Trigger the create campaign button
-            document.querySelector<HTMLButtonElement>('[data-create-campaign]')?.click();
-          },
-        }}
       />
     );
   }

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAdSlots } from '@/lib/api';
 import { GridSkeleton, Pagination, EmptyState, ErrorState } from '@/app/components/ui';
+import { trackMarketplaceEvent } from '@/lib/analytics';
 
 interface AdSlot {
   id: string;
@@ -52,6 +53,8 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
   // Reset to page 1 when filter changes
   useEffect(() => {
     setCurrentPage(1);
+    // Track filter change
+    trackMarketplaceEvent.filterMarketplace('status', filter);
   }, [filter]);
 
   // Filter logic
@@ -144,7 +147,11 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
                 ease: [0.19, 1, 0.22, 1],
               }}
             >
-              <Link href={`/marketplace/${slot.id}`} className="block h-full group">
+              <Link 
+                href={`/marketplace/${slot.id}`} 
+                className="block h-full group"
+                onClick={() => trackMarketplaceEvent.viewAdSlot(slot.id, slot.name)}
+              >
                 <motion.div
                   className="relative h-full bg-white border border-gray-200 rounded-xl overflow-hidden transition-all duration-200 hover:border-indigo-300 hover:shadow-lg"
                   whileHover={{ y: -4 }}

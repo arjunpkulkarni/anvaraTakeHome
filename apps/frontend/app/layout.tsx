@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { DM_Sans } from 'next/font/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { Nav } from './components/nav';
 import { ToastProvider } from './components/ui';
@@ -99,6 +100,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   // HINT: If using React Query, you would wrap children with QueryClientProvider here
   // See: https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr
+
+  // Google Analytics ID - In production, this should come from environment variables
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX';
+
   return (
     <html lang="en" className={dmSans.variable}>
       <head>
@@ -115,6 +120,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main id="main-content">{children}</main>
           </ToastProvider>
         </ErrorBoundary>
+        {/* Google Analytics - Only loads in production or when GA_ID is set */}
+        {gaId && gaId !== 'G-XXXXXXXXXX' && <GoogleAnalytics gaId={gaId} />}
       </body>
     </html>
   );

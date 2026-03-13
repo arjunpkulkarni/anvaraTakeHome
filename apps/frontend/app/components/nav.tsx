@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { authClient } from '@/auth-client';
-import { Button } from './ui';
+import { trackAuthEvent } from '@/lib/analytics';
 
 type UserRole = 'sponsor' | 'publisher' | null;
 
@@ -15,6 +15,7 @@ export function Nav() {
   const user = session?.user;
   const [role, setRole] = useState<UserRole>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -36,9 +37,25 @@ export function Nav() {
   useEffect(() => {
     const closeMobileMenu = () => {
       setMobileMenuOpen(false);
+      setDropdownOpen(false);
     };
     closeMobileMenu();
   }, [pathname]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('[data-user-dropdown]')) {
+        setDropdownOpen(false);
+      }
+    };
+
+    if (dropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [dropdownOpen]);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -54,8 +71,18 @@ export function Nav() {
 
   const isActive = (path: string) => pathname === path;
 
+  // Get user initials for avatar
+  const getUserInitials = (name?: string) => {
+    if (!name) return 'U';
+    const parts = name.trim().split(' ');
+    if (parts.length >= 2) {
+      return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
+    }
+    return name.slice(0, 2).toUpperCase();
+  };
+
   return (
-    <motion.header 
+    <motion.header
       className="sticky top-0 z-40 w-full border-b border-[var(--color-border)] bg-white/80 backdrop-blur-sm"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -140,7 +167,7 @@ export function Nav() {
 
           <AnimatePresence mode="wait">
             {isPending ? (
-              <motion.span 
+              <motion.span
                 className="text-[var(--color-text-muted)]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -149,31 +176,74 @@ export function Nav() {
                 ...
               </motion.span>
             ) : user ? (
-              <motion.div 
-                className="flex items-center gap-3"
+              <motion.div
+                className="relative"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
+                data-user-dropdown
               >
-                <span className="text-sm text-[var(--color-text-secondary)]">
-                  {user.name} {role && <span className="text-[var(--color-text-muted)]">({role})</span>}
-                </span>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={async () => {
-                    await authClient.signOut({
-                      fetchOptions: {
-                        onSuccess: () => {
-                          window.location.href = '/';
-                        },
-                      },
-                    });
-                  }}
+                {/* User Avatar Button */}
+                <motion.button
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="flex items-center gap-2 focus:outline-none"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="User menu"
+                  aria-expanded={dropdownOpen}
                 >
-                  Logout
-                </Button>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white font-semibold text-sm shadow-md hover:shadow-lg transition-shadow cursor-pointer">
+                    {getUserInitials(user.name)}
+                  </div>
+                </motion.button>
+
+                {/* Dropdown Menu */}
+                <AnimatePresence>
+                  {dropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden z-50"
+                    >
+                      {/* User Info Section */}
+                      <div className="px-4 py-3 border-b border-gray-100 bg-gray-50">
+                        <div className="font-medium text-gray-900">{user.name}</div>
+                        <div className="text-sm text-gray-500">{user.email}</div>
+                        {role && (
+                          <div className="mt-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 capitalize">
+                            {role}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Logout Button */}
+                      <div className="p-2">
+                        <button
+                          onClick={async () => {
+                            setDropdownOpen(false);
+                            trackAuthEvent.logout();
+                            await authClient.signOut({
+                              fetchOptions: {
+                                onSuccess: () => {
+                                  window.location.href = '/';
+                                },
+                              },
+                            });
+                          }}
+                          className="w-full px-4 py-2 text-left text-sm font-medium text-red-600 hover:bg-red-50 rounded-md transition-colors flex items-center gap-2"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                          </svg>
+                          Logout
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ) : (
               <motion.div
@@ -183,9 +253,28 @@ export function Nav() {
                 transition={{ duration: 0.3 }}
               >
                 <Link href="/login">
-                  <Button size="sm">
+                  <motion.button
+                    style={{
+                      padding: '8px 16px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      color: 'white',
+                      backgroundColor: '#2563eb',
+                      borderRadius: '8px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                      transition: 'all 0.2s',
+                    }}
+                    whileHover={{
+                      scale: 1.02,
+                      backgroundColor: '#1d4ed8',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                  >
                     Login
-                  </Button>
+                  </motion.button>
                 </Link>
               </motion.div>
             )}

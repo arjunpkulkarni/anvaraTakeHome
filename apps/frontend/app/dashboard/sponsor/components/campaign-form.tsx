@@ -4,7 +4,8 @@ import { useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { useEffect } from 'react';
 import { createCampaign, updateCampaign } from '../actions';
-import { Button, Input, Textarea, Select, FormError } from '@/app/components/ui';
+import { Input, Textarea, Select, FormError } from '@/app/components/ui';
+import { trackFormSubmit } from '@/lib/analytics';
 
 interface Campaign {
   id: string;
@@ -31,7 +32,34 @@ function SubmitButton({ isEdit }: { isEdit: boolean }) {
     <button
       type="submit"
       disabled={pending}
-      className="w-full inline-flex items-center justify-center rounded-lg bg-black px-4 py-2 text-base font-medium text-white transition-colors duration-200 hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none"
+      style={{
+        width: '100%',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '8px',
+        backgroundColor: pending ? '#93c5fd' : '#2563eb',
+        padding: '12px 16px',
+        fontSize: '16px',
+        fontWeight: '600',
+        color: '#ffffff',
+        border: 'none',
+        cursor: pending ? 'not-allowed' : 'pointer',
+        transition: 'all 0.2s',
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+      }}
+      onMouseEnter={(e) => {
+        if (!pending) {
+          e.currentTarget.style.backgroundColor = '#1d4ed8';
+          e.currentTarget.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.15)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!pending) {
+          e.currentTarget.style.backgroundColor = '#2563eb';
+          e.currentTarget.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+        }
+      }}
     >
       {pending ? 'Saving...' : isEdit ? 'Update Campaign' : 'Create Campaign'}
     </button>
@@ -47,9 +75,14 @@ export function CampaignForm({ campaign, onSuccess, onCancel }: CampaignFormProp
 
   useEffect(() => {
     if (formState.success) {
+      // Track successful form submission
+      trackFormSubmit(isEdit ? 'update_campaign' : 'create_campaign', true);
       onSuccess?.();
+    } else if (formState.error) {
+      // Track failed form submission
+      trackFormSubmit(isEdit ? 'update_campaign' : 'create_campaign', false);
     }
-  }, [formState.success, onSuccess]);
+  }, [formState.success, formState.error, onSuccess, isEdit]);
 
   // Format dates for input[type="date"]
   const formatDate = (dateStr?: string) => {
@@ -145,11 +178,33 @@ export function CampaignForm({ campaign, onSuccess, onCancel }: CampaignFormProp
         />
       </div>
 
-      <div className="flex gap-2 justify-end pt-2">
+      <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', paddingTop: '16px' }}>
         {onCancel && (
-          <Button type="button" onClick={onCancel} variant="secondary">
+          <button
+            type="button"
+            onClick={onCancel}
+            style={{
+              padding: '12px 24px',
+              fontSize: '16px',
+              fontWeight: '600',
+              color: '#374151',
+              backgroundColor: 'white',
+              border: '2px solid #e5e7eb',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#f9fafb';
+              e.currentTarget.style.borderColor = '#d1d5db';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'white';
+              e.currentTarget.style.borderColor = '#e5e7eb';
+            }}
+          >
             Cancel
-          </Button>
+          </button>
         )}
         <SubmitButton isEdit={isEdit} />
       </div>

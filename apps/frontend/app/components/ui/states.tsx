@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 
 interface EmptyStateProps {
-  icon?: string;
   title: string;
   description?: string;
   action?: {
@@ -14,7 +13,7 @@ interface EmptyStateProps {
   children?: ReactNode;
 }
 
-export function EmptyState({ icon = '📭', title, description, action, children }: EmptyStateProps) {
+export function EmptyState({ title, description, action, children }: EmptyStateProps) {
   return (
     <motion.div
       className="flex flex-col items-center justify-center py-16 px-4 text-center"
@@ -22,17 +21,9 @@ export function EmptyState({ icon = '📭', title, description, action, children
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <motion.div
-        className="text-7xl mb-6"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.2 }}
-      >
-        {icon}
-      </motion.div>
       <h3 className="text-2xl font-semibold text-gray-900 mb-3">{title}</h3>
       {description && (
-        <p className="text-gray-600 max-w-md mb-6 text-lg">{description}</p>
+        <p className="text-gray-600 max-w-md mb-6 text-lg" style={{ marginTop: "10px" }}>{description}</p>
       )}
       {action && (
         <motion.button
@@ -56,11 +47,11 @@ interface ErrorStateProps {
   onGoBack?: () => void;
 }
 
-export function ErrorState({ 
-  title = 'Something went wrong', 
-  message, 
-  onRetry, 
-  onGoBack 
+export function ErrorState({
+  title = 'Something went wrong',
+  message,
+  onRetry,
+  onGoBack
 }: ErrorStateProps) {
   return (
     <motion.div
@@ -89,17 +80,17 @@ export function ErrorState({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <svg 
-                  className="w-4 h-4 mr-2" 
-                  fill="none" 
-                  stroke="currentColor" 
+                <svg
+                  className="w-4 h-4 mr-2"
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" 
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
                   />
                 </svg>
                 Try Again
@@ -112,17 +103,17 @@ export function ErrorState({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <svg 
-                  className="w-4 h-4 mr-2" 
-                  fill="none" 
-                  stroke="currentColor" 
+                <svg
+                  className="w-4 h-4 mr-2"
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M10 19l-7-7m0 0l7-7m-7 7h18" 
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
                   />
                 </svg>
                 Go Back
