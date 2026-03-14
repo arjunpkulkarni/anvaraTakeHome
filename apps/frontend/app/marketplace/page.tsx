@@ -19,9 +19,9 @@ export default function MarketplacePage() {
             <h1 style={{ fontSize: '36px', fontWeight: '700', color: '#111827', letterSpacing: '-0.02em' }}>
               Marketplace
             </h1>
-            <div style={{ 
-              display: 'inline-flex', 
-              alignItems: 'center', 
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
               gap: '6px',
               backgroundColor: '#f0fdf4',
               color: '#15803d',
@@ -37,12 +37,12 @@ export default function MarketplacePage() {
           <p style={{ fontSize: '17px', color: '#4b5563', lineHeight: '1.6', maxWidth: '640px' }}>
             Discover high-impact advertising placements with verified publishers. Reach engaged audiences and grow your brand with authentic sponsorships.
           </p>
-          
+
           {/* Trust signals */}
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '24px', 
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '24px',
             marginTop: '16px',
             fontSize: '14px',
             color: '#6b7280'

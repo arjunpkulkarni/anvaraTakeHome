@@ -259,20 +259,10 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
                       }}
                     >
                       <span 
-                        style={{
-                          color: '#ffffff',
-                          fontWeight: '700',
-                          fontSize: '14px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '8px',
-                          transform: 'translateY(16px)',
-                          transition: 'transform 0.2s ease-in-out'
-                        }}
-                        className="group-hover:translate-y-0"
+                        className="text-white font-bold text-sm flex items-center gap-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-200 ease-in-out"
                       >
                         View Details & Book
-                        <svg style={{ width: '20px', height: '20px' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                       </span>

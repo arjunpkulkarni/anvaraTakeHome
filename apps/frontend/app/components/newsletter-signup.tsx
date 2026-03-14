@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NewsletterSignupProps {
@@ -13,15 +13,45 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [isDismissed, setIsDismissed] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState<boolean | null>(null); // null = loading, true = subscribed, false = not subscribed
 
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
 
+  // Check if user is already subscribed on component mount
+  useEffect(() => {
+    const checkSubscriptionStatus = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291'}/api/newsletter/status`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setIsSubscribed(data.isSubscribed || false);
+        } else {
+          // If API call fails, assume not subscribed to show the form
+          setIsSubscribed(false);
+        }
+      } catch (error) {
+        // If API call fails, assume not subscribed to show the form
+        console.error('Failed to check subscription status:', error);
+        setIsSubscribed(false);
+      }
+    };
+
+    checkSubscriptionStatus();
+  }, []);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
+
     if (!email) {
       setStatus('error');
       setErrorMessage('Please enter your email address');
@@ -55,11 +85,11 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
 
       setStatus('success');
       setEmail('');
-      
-      // Auto-dismiss success message after 5 seconds
+
+      // Auto-dismiss component after showing success message briefly
       setTimeout(() => {
         setIsDismissed(true);
-      }, 5000);
+      }, 2000);
     } catch (error) {
       setStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
@@ -122,7 +152,7 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
             </motion.form>
           )}
         </AnimatePresence>
-        
+
         {status === 'error' && (
           <motion.p
             initial={{ opacity: 0, y: -5 }}
@@ -228,7 +258,45 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="w-full px-6 py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
+                style={{
+                  width: '100%',
+                  paddingLeft: '1.5rem',
+                  paddingRight: '1.5rem',
+                  paddingTop: '0.75rem',
+                  paddingBottom: '0.75rem',
+                  backgroundColor: '#4f46e5',
+                  color: 'white',
+                  fontWeight: '600',
+                  borderRadius: '0.75rem',
+                  border: 'none',
+                  cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+                  opacity: status === 'loading' ? 0.5 : 1,
+                  outline: 'none',
+                  transition: 'all 0.3s ease',
+                  transform: 'translateY(0)',
+                  boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                  marginBottom: '20px'
+                }}
+                onMouseEnter={(e) => {
+                  if (status !== 'loading') {
+                    e.target.style.backgroundColor = '#4338ca';
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (status !== 'loading') {
+                    e.target.style.backgroundColor = '#4f46e5';
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
+                  }
+                }}
+                onFocus={(e) => {
+                  e.target.style.boxShadow = '0 0 0 2px rgba(79, 70, 229, 0.5), 0 0 0 4px rgba(79, 70, 229, 0.1)';
+                }}
+                onBlur={(e) => {
+                  e.target.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
+                }}
               >
                 {status === 'loading' ? (
                   <span className="flex items-center justify-center gap-2">
