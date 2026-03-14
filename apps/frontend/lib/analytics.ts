@@ -11,7 +11,7 @@ declare global {
     gtag?: (
       command: 'event' | 'config' | 'set',
       targetId: string,
-      config?: Record<string, any>
+      config?: Record<string, string | number | boolean>
     ) => void;
   }
 }
@@ -28,7 +28,7 @@ const isAnalyticsAvailable = (): boolean => {
  */
 export const trackEvent = (
   eventName: string,
-  eventParams?: Record<string, any>
+  eventParams?: Record<string, string | number | boolean>
 ) => {
   if (!isAnalyticsAvailable()) {
     console.log('[Analytics Debug]', eventName, eventParams);

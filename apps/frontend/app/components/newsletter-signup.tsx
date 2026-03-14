@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent, useEffect } from 'react';
+import { useState, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NewsletterSignupProps {
@@ -13,41 +13,12 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [isDismissed, setIsDismissed] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState<boolean | null>(null); // null = loading, true = subscribed, false = not subscribed
 
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
 
-  // Check if user is already subscribed on component mount
-  useEffect(() => {
-    const checkSubscriptionStatus = async () => {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291'}/api/newsletter/status`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setIsSubscribed(data.isSubscribed || false);
-        } else {
-          // If API call fails, assume not subscribed to show the form
-          setIsSubscribed(false);
-        }
-      } catch (error) {
-        // If API call fails, assume not subscribed to show the form
-        console.error('Failed to check subscription status:', error);
-        setIsSubscribed(false);
-      }
-    };
-
-    checkSubscriptionStatus();
-  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
