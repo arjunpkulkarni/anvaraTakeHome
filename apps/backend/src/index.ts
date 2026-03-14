@@ -7,10 +7,12 @@ const PORT = process.env.BACKEND_PORT || 4291;
 
 // Middleware
 // CORS configuration to allow credentials from frontend
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3847',
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:3847',
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Mount all API routes

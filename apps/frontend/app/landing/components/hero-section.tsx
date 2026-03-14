@@ -6,10 +6,7 @@ import { fadeInUp, staggerContainer } from '@/lib/animations';
 
 export function HeroSection() {
   return (
-    <section
-      className="container py-24 md:py-32 px-4"
-      aria-labelledby="hero-heading"
-    >
+    <section className="container py-24 md:py-32 px-4" aria-labelledby="hero-heading">
       <div className="max-w-5xl mx-auto">
         <motion.div
           className="text-center space-y-8"
@@ -42,8 +39,8 @@ export function HeroSection() {
             <Link
               href="/login"
               className="min-w-[200px] inline-flex items-center justify-center rounded-lg bg-[#667eea] px-6 py-3 text-lg font-medium transition hover:opacity-90"
-              style={{color: 'white'}}
-              >
+              style={{ color: 'white' }}
+            >
               Get Started Free
             </Link>
 
@@ -55,10 +52,7 @@ export function HeroSection() {
             </Link>
           </motion.div>
 
-          <motion.div
-            className="pt-8 flex flex-col items-center gap-4"
-            variants={fadeInUp}
-          >
+          <motion.div className="pt-8 flex flex-col items-center gap-4" variants={fadeInUp}>
             <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
               <motion.div
                 className="flex -space-x-2"
@@ -73,7 +67,7 @@ export function HeroSection() {
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{
-                      delay: 0.5 + (i * 0.1),
+                      delay: 0.5 + i * 0.1,
                       type: 'spring',
                       stiffness: 400,
                       damping: 25,
@@ -101,7 +95,7 @@ export function HeroSection() {
                       initial={{ scale: 0, rotate: -180 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{
-                        delay: 0.8 + (i * 0.1),
+                        delay: 0.8 + i * 0.1,
                         type: 'spring',
                         stiffness: 400,
                         damping: 20,

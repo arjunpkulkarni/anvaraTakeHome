@@ -58,12 +58,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const title = `${adSlot.name} by ${adSlot.publisher?.name || 'Publisher'}`;
-  const description = adSlot.description ||
+  const description =
+    adSlot.description ||
     `Premium ${adSlot.type.toLowerCase()} advertising placement. ${formatPrice(adSlot.basePrice)} per month. ${adSlot.isAvailable ? 'Available now' : 'Currently booked'}.`;
 
-  const shortDescription = description.length > 160
-    ? description.slice(0, 157) + '...'
-    : description;
+  const shortDescription =
+    description.length > 160 ? description.slice(0, 157) + '...' : description;
 
   return {
     title,

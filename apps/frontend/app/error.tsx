@@ -31,12 +31,8 @@ export default function Error({
             />
           </svg>
         </div>
-        <h1 className="text-2xl font-bold text-zinc-900 mb-2">
-          Something went wrong
-        </h1>
-        <p className="text-zinc-600 mb-6">
-          {error.message || 'An unexpected error occurred'}
-        </p>
+        <h1 className="text-2xl font-bold text-zinc-900 mb-2">Something went wrong</h1>
+        <p className="text-zinc-600 mb-6">{error.message || 'An unexpected error occurred'}</p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button
             onClick={reset}

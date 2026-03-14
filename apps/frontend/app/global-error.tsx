@@ -33,9 +33,7 @@ export default function GlobalError({
                 />
               </svg>
             </div>
-            <h1 className="text-2xl font-bold text-zinc-900 mb-2">
-              Application Error
-            </h1>
+            <h1 className="text-2xl font-bold text-zinc-900 mb-2">Application Error</h1>
             <p className="text-zinc-600 mb-6">
               A critical error occurred. Please try refreshing the page.
             </p>

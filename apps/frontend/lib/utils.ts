@@ -47,7 +47,7 @@ export function cn(...classes: (string | boolean | undefined | null)[]): string 
 }
 
 // Sleep utility for testing/debugging
-export const sleep = (ms: number): Promise<void> => 
+export const sleep = (ms: number): Promise<void> =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
 // Deep clone an object
@@ -75,12 +75,12 @@ export const logger = {
 export function formatRelativeTime(date: Date | string | number): string {
   const now = new Date();
   const then = new Date(date);
-  
+
   // Check if date is valid
   if (isNaN(then.getTime())) {
     return 'Invalid date';
   }
-  
+
   const diff = now.getTime() - then.getTime();
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
 

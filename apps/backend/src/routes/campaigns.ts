@@ -19,7 +19,16 @@ router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
     const campaigns = await prisma.campaign.findMany({
       where: {
         sponsorId: req.user.sponsorId,
-        ...(status && { status: status as 'DRAFT' | 'PENDING_REVIEW' | 'APPROVED' | 'ACTIVE' | 'PAUSED' | 'COMPLETED' | 'CANCELLED' }),
+        ...(status && {
+          status: status as
+            | 'DRAFT'
+            | 'PENDING_REVIEW'
+            | 'APPROVED'
+            | 'ACTIVE'
+            | 'PAUSED'
+            | 'COMPLETED'
+            | 'CANCELLED',
+        }),
       },
       include: {
         sponsor: { select: { id: true, name: true, logo: true } },
@@ -169,7 +178,15 @@ router.put('/:id', requireAuth, async (req: AuthRequest, res: Response) => {
     } = req.body;
 
     // Validate status if provided
-    const validStatuses = ['DRAFT', 'PENDING_REVIEW', 'APPROVED', 'ACTIVE', 'PAUSED', 'COMPLETED', 'CANCELLED'];
+    const validStatuses = [
+      'DRAFT',
+      'PENDING_REVIEW',
+      'APPROVED',
+      'ACTIVE',
+      'PAUSED',
+      'COMPLETED',
+      'CANCELLED',
+    ];
     if (status && !validStatuses.includes(status)) {
       res.status(400).json({ error: 'Invalid status value' });
       return;
@@ -192,7 +209,14 @@ router.put('/:id', requireAuth, async (req: AuthRequest, res: Response) => {
       endDate?: Date;
       targetCategories?: string[];
       targetRegions?: string[];
-      status?: 'DRAFT' | 'PENDING_REVIEW' | 'APPROVED' | 'ACTIVE' | 'PAUSED' | 'COMPLETED' | 'CANCELLED';
+      status?:
+        | 'DRAFT'
+        | 'PENDING_REVIEW'
+        | 'APPROVED'
+        | 'ACTIVE'
+        | 'PAUSED'
+        | 'COMPLETED'
+        | 'CANCELLED';
     }
 
     const updateData: CampaignUpdateData = {};

@@ -7,22 +7,22 @@ import { fadeInUp, staggerContainer } from '@/lib/animations';
 export function CTASection() {
   const testimonials = [
     {
-      quote: "Anvara helped us reach the perfect audience. Our ROI increased by 300%!",
-      author: "Sarah Chen",
-      role: "Marketing Director, TechCorp",
-      avatar: "SC",
+      quote: 'Anvara helped us reach the perfect audience. Our ROI increased by 300%!',
+      author: 'Sarah Chen',
+      role: 'Marketing Director, TechCorp',
+      avatar: 'SC',
     },
     {
       quote: "The easiest way to monetize our content. We're earning 5x more than before.",
-      author: "Michael Rodriguez",
-      role: "Publisher, CodeDaily",
-      avatar: "MR",
+      author: 'Michael Rodriguez',
+      role: 'Publisher, CodeDaily',
+      avatar: 'MR',
     },
     {
-      quote: "Smart matching and transparent pricing. This is the future of sponsorships.",
-      author: "Emily Watson",
-      role: "CEO, CreatorHub",
-      avatar: "EW",
+      quote: 'Smart matching and transparent pricing. This is the future of sponsorships.',
+      author: 'Emily Watson',
+      role: 'CEO, CreatorHub',
+      avatar: 'EW',
     },
   ];
 
@@ -84,14 +84,17 @@ export function CTASection() {
         />
       </div>
 
-      <div className="container px-4 relative" style={{ zIndex: 10, maxWidth: '1200px', margin: '0 auto' }}>
+      <div
+        className="container px-4 relative"
+        style={{ zIndex: 10, maxWidth: '1200px', margin: '0 auto' }}
+      >
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           {/* Testimonials */}
-          <motion.div 
-            style={{marginBottom: '64px'}}
+          <motion.div
+            style={{ marginBottom: '64px' }}
             initial="initial"
             whileInView="animate"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             variants={staggerContainer}
           >
             <motion.h2
@@ -101,7 +104,7 @@ export function CTASection() {
                 fontWeight: 500,
                 color: 'white',
                 opacity: 0.9,
-                marginBottom: '28px'
+                marginBottom: '28px',
               }}
               variants={fadeInUp}
             >
@@ -118,7 +121,7 @@ export function CTASection() {
                     border: '1px solid rgba(255, 255, 255, 0.2)',
                   }}
                   variants={fadeInUp}
-                  whileHover={{ 
+                  whileHover={{
                     y: -8,
                     boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
                   }}
@@ -126,10 +129,10 @@ export function CTASection() {
                 >
                   <div className="flex gap-1 mb-4">
                     {[1, 2, 3, 4, 5].map((star) => (
-                      <motion.svg 
-                        key={star} 
-                        className="w-4 h-4" 
-                        viewBox="0 0 20 20" 
+                      <motion.svg
+                        key={star}
+                        className="w-4 h-4"
+                        viewBox="0 0 20 20"
                         style={{ fill: '#fbbf24' }}
                         initial={{ scale: 0, rotate: -180 }}
                         whileInView={{ scale: 1, rotate: 0 }}
@@ -177,8 +180,8 @@ export function CTASection() {
           </motion.div>
 
           {/* Main CTA */}
-          <motion.div 
-            className="text-center" 
+          <motion.div
+            className="text-center"
             style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}
             initial="initial"
             whileInView="animate"
@@ -219,7 +222,8 @@ export function CTASection() {
                     fontSize: '18px',
                     background: 'white',
                     color: '#2563eb',
-                    boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+                    boxShadow:
+                      '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
                   }}
                 >
                   Start Free Trial
@@ -249,7 +253,7 @@ export function CTASection() {
             </motion.div>
 
             {/* Trust Signals */}
-            <motion.div 
+            <motion.div
               style={{ paddingTop: '32px', display: 'flex', flexDirection: 'column', gap: '16px' }}
               variants={fadeInUp}
             >
@@ -261,24 +265,39 @@ export function CTASection() {
                 }}
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span>Free 14-day trial</span>
                 <span>•</span>
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span>No credit card required</span>
                 <span>•</span>
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span>Cancel anytime</span>
               </div>
 
               {/* Trusted By Logos */}
               <div style={{ paddingTop: '32px' }}>
-                <p className="text-white" style={{ fontSize: '14px', opacity: 0.6, marginBottom: '16px' }}>
+                <p
+                  className="text-white"
+                  style={{ fontSize: '14px', opacity: 0.6, marginBottom: '16px' }}
+                >
                   FEATURED IN
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-8">
@@ -297,7 +316,7 @@ export function CTASection() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
-                      whileHover={{ 
+                      whileHover={{
                         scale: 1.1,
                         background: 'rgba(255, 255, 255, 0.2)',
                       }}

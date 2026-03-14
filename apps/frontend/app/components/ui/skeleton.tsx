@@ -10,11 +10,11 @@ interface SkeletonProps {
   className?: string;
 }
 
-export function Skeleton({ 
-  width = '100%', 
-  height = '20px', 
+export function Skeleton({
+  width = '100%',
+  height = '20px',
   borderRadius = '4px',
-  className = '' 
+  className = '',
 }: SkeletonProps) {
   return (
     <motion.div
@@ -41,7 +41,14 @@ export function CardSkeleton() {
         boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
       }}
     >
-      <div style={{ marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+      <div
+        style={{
+          marginBottom: '12px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'start',
+        }}
+      >
         <Skeleton width="60%" height="24px" />
         <Skeleton width="80px" height="24px" borderRadius="12px" />
       </div>

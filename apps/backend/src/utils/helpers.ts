@@ -50,7 +50,7 @@ export function isValidEmail(email: string): boolean {
 
 // Helper to build filter object from query params
 export const buildFilters = (
-  query: Record<string, unknown>, 
+  query: Record<string, unknown>,
   allowedFields: string[]
 ): Record<string, unknown> => {
   const filters: Record<string, unknown> = {};
@@ -74,11 +74,11 @@ export function clampValue(value: number, min: number, max: number): number {
 // Format date to localized string
 export function formatDate(date: Date | string | number): string {
   const dateObject = new Date(date);
-  
+
   // Check if date is valid
   if (isNaN(dateObject.getTime())) {
     return 'Invalid Date';
   }
-  
+
   return dateObject.toLocaleDateString();
 }

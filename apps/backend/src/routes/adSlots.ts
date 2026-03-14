@@ -179,9 +179,14 @@ router.post('/:id/book', requireAuth, async (req: AuthRequest, res: Response) =>
       const creative = await tx.creative.create({
         data: {
           name: `${adSlot.name} Creative`,
-          type: adSlot.type === 'PODCAST' ? 'PODCAST_READ' : 
-                adSlot.type === 'VIDEO' ? 'VIDEO' : 
-                adSlot.type === 'NEWSLETTER' ? 'SPONSORED_POST' : 'NATIVE',
+          type:
+            adSlot.type === 'PODCAST'
+              ? 'PODCAST_READ'
+              : adSlot.type === 'VIDEO'
+                ? 'VIDEO'
+                : adSlot.type === 'NEWSLETTER'
+                  ? 'SPONSORED_POST'
+                  : 'NATIVE',
           assetUrl: 'https://placeholder.com/creative',
           clickUrl: 'https://example.com',
           altText: `Creative for ${adSlot.name}`,
@@ -217,7 +222,9 @@ router.post('/:id/book', requireAuth, async (req: AuthRequest, res: Response) =>
       return { campaign, placement, updatedSlot };
     });
 
-    console.log(`Ad slot ${id} booked by sponsor ${req.user.sponsorId}. Campaign created: ${result.campaign.id}`);
+    console.log(
+      `Ad slot ${id} booked by sponsor ${req.user.sponsorId}. Campaign created: ${result.campaign.id}`
+    );
 
     res.json({
       success: true,

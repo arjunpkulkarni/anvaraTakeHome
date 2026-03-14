@@ -10,7 +10,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291';
 
 export const metadata: Metadata = {
   title: 'My Ad Slots - Publisher Dashboard',
-  description: 'Manage your advertising inventory, monitor bookings, and maximize your monetization. Track ad slot performance and availability.',
+  description:
+    'Manage your advertising inventory, monitor bookings, and maximize your monetization. Track ad slot performance and availability.',
   robots: {
     index: false, // Dashboard pages should not be indexed
     follow: false,
@@ -72,16 +73,29 @@ export default async function PublisherDashboard() {
     <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px' }}>
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
-          <h1 style={{ fontSize: '32px', fontWeight: '600', color: '#111827' }}>
-            Listings
-          </h1>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '32px',
+          }}
+        >
+          <h1 style={{ fontSize: '32px', fontWeight: '600', color: '#111827' }}>Listings</h1>
           <CreateAdSlotButton />
         </div>
 
         {/* Tab Filters */}
         <div style={{ marginBottom: '32px' }}>
-          <div style={{ display: 'inline-flex', backgroundColor: 'white', borderRadius: '12px', padding: '4px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              backgroundColor: 'white',
+              borderRadius: '12px',
+              padding: '4px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+            }}
+          >
             <button
               style={{
                 padding: '8px 24px',

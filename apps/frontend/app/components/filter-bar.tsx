@@ -9,17 +9,19 @@ export function FilterBar<T extends string>({
   filters,
   activeFilter,
   onFilterChange,
-  labels
+  labels,
 }: FilterBarProps<T>) {
   return (
     <div style={{ marginBottom: '32px' }}>
-      <div style={{
-        display: 'inline-flex',
-        backgroundColor: 'white',
-        borderRadius: '12px',
-        padding: '4px',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
-      }}>
+      <div
+        style={{
+          display: 'inline-flex',
+          backgroundColor: 'white',
+          borderRadius: '12px',
+          padding: '4px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        }}
+      >
         {filters.map((filter) => (
           <button
             key={filter}

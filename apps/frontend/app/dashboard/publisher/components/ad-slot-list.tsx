@@ -19,23 +19,27 @@ interface AdSlotListProps {
 
 export function AdSlotList({ adSlots }: AdSlotListProps) {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   if (adSlots.length === 0) {
     return (
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '400px',
-        textAlign: 'center',
-      }}>
-        <p style={{
-          fontSize: '16px',
-          color: '#111827',
-          marginBottom: '24px',
-          fontWeight: '400',
-        }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '400px',
+          textAlign: 'center',
+        }}
+      >
+        <p
+          style={{
+            fontSize: '16px',
+            color: '#111827',
+            marginBottom: '24px',
+            fontWeight: '400',
+          }}
+        >
           You don't have any listings.
         </p>
         <Link

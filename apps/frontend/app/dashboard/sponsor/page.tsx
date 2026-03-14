@@ -9,7 +9,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291';
 
 export const metadata: Metadata = {
   title: 'My Campaigns - Sponsor Dashboard',
-  description: 'Manage your advertising campaigns, track performance, and optimize your sponsorship strategy. View campaign analytics and booking details.',
+  description:
+    'Manage your advertising campaigns, track performance, and optimize your sponsorship strategy. View campaign analytics and booking details.',
   robots: {
     index: false, // Dashboard pages should not be indexed
     follow: false,

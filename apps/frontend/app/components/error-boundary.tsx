@@ -54,9 +54,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 />
               </svg>
             </div>
-            <h1 className="text-2xl font-bold text-zinc-900 mb-2">
-              Something went wrong
-            </h1>
+            <h1 className="text-2xl font-bold text-zinc-900 mb-2">Something went wrong</h1>
             <p className="text-zinc-600 mb-6">
               {this.state.error.message || 'An unexpected error occurred'}
             </p>

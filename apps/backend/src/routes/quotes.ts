@@ -66,7 +66,7 @@ router.post('/request', async (req: Request, res: Response) => {
     console.log(`  Submitted: ${new Date().toISOString()}\n`);
 
     // Simulate processing delay
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise((resolve) => setTimeout(resolve, 800));
 
     // In a real implementation, you would:
     // 1. Save quote request to database with status 'PENDING'

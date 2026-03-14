@@ -58,7 +58,7 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
   }, [filter]);
 
   // Filter logic
-  const filteredAdSlots = allAdSlots.filter(slot => {
+  const filteredAdSlots = allAdSlots.filter((slot) => {
     if (filter === 'available') {
       return slot.isAvailable;
     }
@@ -86,12 +86,7 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
   }
 
   if (error) {
-    return (
-      <ErrorState
-        message={error}
-        onRetry={loadAdSlots}
-      />
-    );
+    return <ErrorState message={error} onRetry={loadAdSlots} />;
   }
 
   if (allAdSlots.length === 0) {
@@ -147,17 +142,17 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
                 ease: [0.19, 1, 0.22, 1],
               }}
             >
-              <Link 
-                href={`/marketplace/${slot.id}`} 
+              <Link
+                href={`/marketplace/${slot.id}`}
                 className="block h-full group"
                 onClick={() => trackMarketplaceEvent.viewAdSlot(slot.id, slot.name)}
               >
                 <div
                   className="relative bg-white border border-gray-200 rounded-xl overflow-hidden transition-all duration-200 hover:border-indigo-300 hover:shadow-lg"
-                  style={{ 
+                  style={{
                     height: '380px',
                     display: 'flex',
-                    flexDirection: 'column'
+                    flexDirection: 'column',
                   }}
                 >
                   {/* Availability Badge - Prominent if available */}
@@ -165,7 +160,9 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
                     <div className="absolute top-3 right-3 z-10">
                       <div className="flex items-center gap-1.5 bg-emerald-500 text-white px-2.5 py-1 rounded-full shadow-sm">
                         <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                        <span className="text-[10px] font-semibold uppercase tracking-wide">Available</span>
+                        <span className="text-[10px] font-semibold uppercase tracking-wide">
+                          Available
+                        </span>
                       </div>
                     </div>
                   )}
@@ -173,27 +170,41 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
                   {!slot.isAvailable && (
                     <div className="absolute top-3 right-3 z-10">
                       <div className="flex items-center gap-1.5 bg-gray-500 text-white px-2.5 py-1 rounded-full">
-                        <span className="text-[10px] font-semibold uppercase tracking-wide">Booked</span>
+                        <span className="text-[10px] font-semibold uppercase tracking-wide">
+                          Booked
+                        </span>
                       </div>
                     </div>
                   )}
 
-                  <div className="p-6" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  <div
+                    className="p-6"
+                    style={{ flex: 1, display: 'flex', flexDirection: 'column' }}
+                  >
                     {/* Type Badge */}
                     <div className="mb-3">
-                      <span className={`inline-block text-[10px] font-semibold px-2.5 py-1 rounded-md uppercase tracking-wider ${
-                        slot.type === 'DISPLAY' ? 'bg-blue-100 text-blue-700' :
-                        slot.type === 'VIDEO' ? 'bg-red-100 text-red-700' :
-                        slot.type === 'NEWSLETTER' ? 'bg-purple-100 text-purple-700' :
-                        slot.type === 'PODCAST' ? 'bg-orange-100 text-orange-700' :
-                        'bg-gray-100 text-gray-700'
-                      }`}>
+                      <span
+                        className={`inline-block text-[10px] font-semibold px-2.5 py-1 rounded-md uppercase tracking-wider ${
+                          slot.type === 'DISPLAY'
+                            ? 'bg-blue-100 text-blue-700'
+                            : slot.type === 'VIDEO'
+                              ? 'bg-red-100 text-red-700'
+                              : slot.type === 'NEWSLETTER'
+                                ? 'bg-purple-100 text-purple-700'
+                                : slot.type === 'PODCAST'
+                                  ? 'bg-orange-100 text-orange-700'
+                                  : 'bg-gray-100 text-gray-700'
+                        }`}
+                      >
                         {slot.type}
                       </span>
                     </div>
 
                     {/* Title - More prominent */}
-                    <h3 className="text-[17px] font-bold text-gray-900 mb-2 leading-tight group-hover:text-indigo-600 transition-colors" style={{ minHeight: '48px' }}>
+                    <h3
+                      className="text-[17px] font-bold text-gray-900 mb-2 leading-tight group-hover:text-indigo-600 transition-colors"
+                      style={{ minHeight: '48px' }}
+                    >
                       {slot.name}
                     </h3>
 
@@ -232,38 +243,52 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
                         </div>
 
                         {/* CTA indicator */}
-                        <div 
+                        <div
                           style={{
                             display: 'flex',
                             alignItems: 'center',
                             gap: '8px',
                             color: '#4f46e5',
-                            transition: 'gap 0.2s ease-in-out'
+                            transition: 'gap 0.2s ease-in-out',
                           }}
                           className="group-hover:gap-3"
                         >
                           <span style={{ fontSize: '13px', fontWeight: '700' }}>View</span>
-                          <svg style={{ width: '16px', height: '16px' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                          <svg
+                            style={{ width: '16px', height: '16px' }}
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M5 12h14M12 5l7 7-7 7" />
                           </svg>
                         </div>
                       </div>
                     </div>
 
                     {/* Hover CTA overlay */}
-                    <div 
+                    <div
                       className="absolute inset-x-0 bottom-0 h-0 opacity-0 group-hover:h-14 group-hover:opacity-100 transition-all duration-200 flex items-center justify-center"
                       style={{
                         background: 'linear-gradient(to top, #4f46e5 0%, #6366f1 100%)',
-                        backdropFilter: 'blur(4px)'
+                        backdropFilter: 'blur(4px)',
                       }}
                     >
-                      <span 
-                        className="text-white font-bold text-sm flex items-center gap-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-200 ease-in-out"
-                      >
+                      <span className="text-white font-bold text-sm flex items-center gap-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-200 ease-in-out">
                         View Details & Book
-                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                        <svg
+                          className="w-5 h-5"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                       </span>
                     </div>

@@ -1,6 +1,12 @@
 'use client';
 
-import { InputHTMLAttributes, TextareaHTMLAttributes, SelectHTMLAttributes, forwardRef, useState } from 'react';
+import {
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+  SelectHTMLAttributes,
+  forwardRef,
+  useState,
+} from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -16,10 +22,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="space-y-1">
         {label && (
-          <motion.label 
-            htmlFor={inputId} 
+          <motion.label
+            htmlFor={inputId}
             className="block text-sm font-medium text-[var(--color-text-primary)]"
-            animate={{ 
+            animate={{
               color: isFocused ? 'var(--color-primary)' : 'var(--color-text-primary)',
               scale: isFocused ? 1.02 : 1,
             }}
@@ -55,7 +61,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         />
         <AnimatePresence>
           {error && (
-            <motion.p 
+            <motion.p
               className="text-sm text-[var(--color-error)]"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -86,10 +92,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="space-y-1">
         {label && (
-          <motion.label 
-            htmlFor={textareaId} 
+          <motion.label
+            htmlFor={textareaId}
             className="block text-sm font-medium text-[var(--color-text-primary)]"
-            animate={{ 
+            animate={{
               color: isFocused ? 'var(--color-primary)' : 'var(--color-text-primary)',
               scale: isFocused ? 1.02 : 1,
             }}
@@ -124,7 +130,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         />
         <AnimatePresence>
           {error && (
-            <motion.p 
+            <motion.p
               className="text-sm text-[var(--color-error)]"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -155,10 +161,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="space-y-1">
         {label && (
-          <motion.label 
-            htmlFor={selectId} 
+          <motion.label
+            htmlFor={selectId}
             className="block text-sm font-medium text-[var(--color-text-primary)]"
-            animate={{ 
+            animate={{
               color: isFocused ? 'var(--color-primary)' : 'var(--color-text-primary)',
               scale: isFocused ? 1.02 : 1,
             }}
@@ -194,7 +200,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         </select>
         <AnimatePresence>
           {error && (
-            <motion.p 
+            <motion.p
               className="text-sm text-[var(--color-error)]"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -216,7 +222,7 @@ export const FormError = ({ error }: { error?: string }) => {
   return (
     <AnimatePresence>
       {error && (
-        <motion.div 
+        <motion.div
           className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-[var(--color-error)]"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}

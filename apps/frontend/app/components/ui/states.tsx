@@ -23,7 +23,9 @@ export function EmptyState({ title, description, action, children }: EmptyStateP
     >
       <h3 className="text-2xl font-semibold text-gray-900 mb-3">{title}</h3>
       {description && (
-        <p className="text-gray-600 max-w-md mb-6 text-lg" style={{ marginTop: "10px" }}>{description}</p>
+        <p className="text-gray-600 max-w-md mb-6 text-lg" style={{ marginTop: '10px' }}>
+          {description}
+        </p>
       )}
       {action && (
         <motion.button
@@ -51,7 +53,7 @@ export function ErrorState({
   title = 'Something went wrong',
   message,
   onRetry,
-  onGoBack
+  onGoBack,
 }: ErrorStateProps) {
   return (
     <motion.div
@@ -80,12 +82,7 @@ export function ErrorState({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <svg
-                  className="w-4 h-4 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -103,12 +100,7 @@ export function ErrorState({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <svg
-                  className="w-4 h-4 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

@@ -8,7 +8,10 @@ interface NewsletterSignupProps {
   placement?: string;
 }
 
-export function NewsletterSignup({ variant = 'default', placement = 'marketplace' }: NewsletterSignupProps) {
+export function NewsletterSignup({
+  variant = 'default',
+  placement = 'marketplace',
+}: NewsletterSignupProps) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -18,7 +21,6 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
-
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -39,14 +41,17 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
     setErrorMessage('');
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291'}/api/newsletter/subscribe`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({ email, placement }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4291'}/api/newsletter/subscribe`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({ email, placement }),
+        }
+      );
 
       const data = await response.json();
 
@@ -63,7 +68,9 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
       }, 2000);
     } catch (error) {
       setStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
+      setErrorMessage(
+        error instanceof Error ? error.message : 'Something went wrong. Please try again.'
+      );
     }
   };
 
@@ -90,7 +97,11 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
             >
               <div className="flex items-center justify-center gap-2 text-emerald-700">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span className="font-semibold text-sm">Thanks for subscribing!</span>
               </div>
@@ -151,7 +162,12 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
         aria-label="Dismiss"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
         </svg>
       </button>
 
@@ -166,12 +182,17 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
           >
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 mb-4">
               <svg className="w-8 h-8 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
               </svg>
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">You're all set!</h3>
             <p className="text-sm text-gray-600">
-              We'll send you updates about new listings, platform features, and exclusive opportunities.
+              We'll send you updates about new listings, platform features, and exclusive
+              opportunities.
             </p>
           </motion.div>
         ) : (
@@ -183,8 +204,18 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center">
-                <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                <svg
+                  className="w-6 h-6 text-indigo-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
                 </svg>
               </div>
               <div>
@@ -220,7 +251,11 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
                   role="alert"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                   {errorMessage}
                 </motion.p>
@@ -246,14 +281,15 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
                   transition: 'all 0.3s ease',
                   transform: 'translateY(0)',
                   boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                  marginBottom: '20px'
+                  marginBottom: '20px',
                 }}
                 onMouseEnter={(e) => {
                   if (status !== 'loading') {
                     const target = e.currentTarget as HTMLButtonElement;
                     target.style.backgroundColor = '#4338ca';
                     target.style.transform = 'translateY(-2px)';
-                    target.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+                    target.style.boxShadow =
+                      '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
                   }
                 }}
                 onMouseLeave={(e) => {
@@ -261,23 +297,37 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
                     const target = e.currentTarget as HTMLButtonElement;
                     target.style.backgroundColor = '#4f46e5';
                     target.style.transform = 'translateY(0)';
-                    target.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
+                    target.style.boxShadow =
+                      '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
                   }
                 }}
                 onFocus={(e) => {
                   const target = e.currentTarget as HTMLButtonElement;
-                  target.style.boxShadow = '0 0 0 2px rgba(79, 70, 229, 0.5), 0 0 0 4px rgba(79, 70, 229, 0.1)';
+                  target.style.boxShadow =
+                    '0 0 0 2px rgba(79, 70, 229, 0.5), 0 0 0 4px rgba(79, 70, 229, 0.1)';
                 }}
                 onBlur={(e) => {
                   const target = e.currentTarget as HTMLButtonElement;
-                  target.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
+                  target.style.boxShadow =
+                    '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
                 }}
               >
                 {status === 'loading' ? (
                   <span className="flex items-center justify-center gap-2">
                     <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
                     </svg>
                     Subscribing...
                   </span>

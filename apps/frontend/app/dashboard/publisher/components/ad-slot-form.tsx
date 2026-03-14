@@ -43,7 +43,7 @@ function SubmitButton({ isEdit }: { isEdit: boolean }) {
         cursor: pending ? 'not-allowed' : 'pointer',
         transition: 'all 0.2s ease',
         opacity: pending ? 0.7 : 1,
-        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
+        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
       }}
       onMouseEnter={(e) => {
         if (!pending) e.currentTarget.style.backgroundColor = '#1d4ed8';
@@ -91,7 +91,13 @@ export function AdSlotForm({ adSlot, onSuccess, onCancel }: AdSlotFormProps) {
         error={formState.fieldErrors?.description}
       />
 
-      <Select name="type" label="Type" defaultValue={adSlot?.type} error={formState.fieldErrors?.type} required>
+      <Select
+        name="type"
+        label="Type"
+        defaultValue={adSlot?.type}
+        error={formState.fieldErrors?.type}
+        required
+      >
         <option value="">Select type...</option>
         <option value="DISPLAY">Display</option>
         <option value="VIDEO">Video</option>
@@ -143,7 +149,7 @@ export function AdSlotForm({ adSlot, onSuccess, onCancel }: AdSlotFormProps) {
               color: '#374151',
               cursor: 'pointer',
               transition: 'all 0.2s ease',
-              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#f9fafb';

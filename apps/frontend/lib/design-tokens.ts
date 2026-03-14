@@ -1,6 +1,6 @@
 /**
  * Design System Tokens
- * 
+ *
  * A minimal, cohesive design system for a modern SaaS product.
  * Based on clean, professional aesthetics inspired by Stripe, Linear, and Vercel.
  */

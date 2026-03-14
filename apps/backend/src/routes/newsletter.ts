@@ -27,7 +27,7 @@ router.post('/subscribe', async (req: Request, res: Response) => {
     // Check for common disposable email domains (optional extra validation)
     const disposableDomains = ['tempmail', 'throwaway', '10minutemail', 'guerrillamail'];
     const domain = email.split('@')[1]?.toLowerCase();
-    if (disposableDomains.some(d => domain?.includes(d))) {
+    if (disposableDomains.some((d) => domain?.includes(d))) {
       return res.status(400).json({
         success: false,
         error: 'Please use a permanent email address',
@@ -38,14 +38,14 @@ router.post('/subscribe', async (req: Request, res: Response) => {
     console.log(`[Newsletter] New subscription: ${email} from ${placement || 'unknown'}`);
 
     // Simulate a slight delay for realistic UX
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     // In a real implementation, you would:
     // 1. Check if email already exists in database
     // 2. Save email to newsletter subscribers table
     // 3. Send welcome email via service like SendGrid/Mailchimp
     // 4. Track conversion metrics
-    
+
     // For now, just return success
     res.status(200).json({
       success: true,

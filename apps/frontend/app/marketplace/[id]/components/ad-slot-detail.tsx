@@ -63,7 +63,6 @@ function getPlatformColor(type: string): string {
   return colors[type] || 'bg-zinc-50 text-zinc-600 ring-1 ring-zinc-200';
 }
 
-
 export function AdSlotDetail({ id }: Props) {
   const [adSlot, setAdSlot] = useState<AdSlot | null>(null);
   const [loading, setLoading] = useState(true);
@@ -189,7 +188,7 @@ export function AdSlotDetail({ id }: Props) {
             className="mb-6 inline-flex items-center text-sm font-medium text-zinc-600 transition hover:text-zinc-900"
           >
             ← Back to marketplace
-        </Link>
+          </Link>
           <div className="rounded-3xl border border-red-200 bg-red-50 p-8 text-center">
             <p className="text-lg font-semibold text-red-900">{error || 'Ad slot not found'}</p>
             <p className="mt-2 text-sm text-red-700">
@@ -209,12 +208,7 @@ export function AdSlotDetail({ id }: Props) {
     'One revision on messaging before publishing',
   ];
 
-  const idealFor = [
-    'Developer tools',
-    'SaaS platforms',
-    'Technical products',
-    'B2B services',
-  ];
+  const idealFor = ['Developer tools', 'SaaS platforms', 'Technical products', 'B2B services'];
 
   const guidelines = [
     'Final messaging must align with creator voice',
@@ -230,7 +224,7 @@ export function AdSlotDetail({ id }: Props) {
           className="mb-6 inline-flex items-center text-sm font-medium text-zinc-600 transition hover:text-zinc-900"
         >
           ← Back to marketplace
-      </Link>
+        </Link>
 
         <section className="overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm">
           {/* Hero Header Section */}
@@ -241,8 +235,16 @@ export function AdSlotDetail({ id }: Props) {
                 <div className="flex items-center justify-between flex-wrap gap-3">
                   <div className="flex items-center gap-2.5">
                     <div className="shrink-0 w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd" />
+                      <svg
+                        className="w-4 h-4 text-amber-600"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                     </div>
                     <div>
@@ -256,7 +258,11 @@ export function AdSlotDetail({ id }: Props) {
                   </div>
                   <div className="text-xs font-medium text-amber-700 bg-amber-100 px-3 py-1.5 rounded-full flex items-center gap-1.5">
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                      <path
+                        fillRule="evenodd"
+                        d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                     Limited availability
                   </div>
@@ -288,7 +294,11 @@ export function AdSlotDetail({ id }: Props) {
                   </span>
                   <span className="rounded-full px-3 py-1 text-xs font-semibold bg-purple-50 text-purple-700 ring-1 ring-purple-100 flex items-center gap-1.5">
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      <path
+                        fillRule="evenodd"
+                        d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                     Verified Publisher
                   </span>
@@ -325,8 +335,18 @@ export function AdSlotDetail({ id }: Props) {
                   <div className="rounded-2xl border border-indigo-200 bg-linear-to-br from-indigo-50 to-blue-50 p-5">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center">
-                        <svg className="w-4 h-4 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        <svg
+                          className="w-4 h-4 text-indigo-700"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                          />
                         </svg>
                       </div>
                       <p className="text-sm font-medium text-indigo-900">Monthly Reach</p>
@@ -343,8 +363,18 @@ export function AdSlotDetail({ id }: Props) {
                   <div className="rounded-2xl border border-emerald-200 bg-linear-to-br from-emerald-50 to-green-50 p-5">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
-                        <svg className="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        <svg
+                          className="w-4 h-4 text-emerald-700"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                          />
                         </svg>
                       </div>
                       <p className="text-sm font-medium text-emerald-900">Avg. Engagement</p>
@@ -361,8 +391,18 @@ export function AdSlotDetail({ id }: Props) {
                   <div className="rounded-2xl border border-amber-200 bg-linear-to-br from-amber-50 to-yellow-50 p-5">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center">
-                        <svg className="w-4 h-4 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        <svg
+                          className="w-4 h-4 text-amber-700"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                          />
                         </svg>
                       </div>
                       <p className="text-sm font-medium text-amber-900">Typical ROI</p>
@@ -375,24 +415,48 @@ export function AdSlotDetail({ id }: Props) {
                 <div className="mt-6 flex flex-wrap items-center gap-5 text-sm text-zinc-600">
                   <div className="flex items-center gap-2">
                     <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      <svg
+                        className="w-3 h-3 text-green-600"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                     </div>
                     <span className="font-medium">24h response time</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      <svg
+                        className="w-3 h-3 text-green-600"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                     </div>
                     <span className="font-medium">Flexible terms</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      <svg
+                        className="w-3 h-3 text-green-600"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                     </div>
                     <span className="font-medium">12 successful campaigns this quarter</span>
@@ -432,7 +496,8 @@ export function AdSlotDetail({ id }: Props) {
                 </div>
 
                 <p className="mt-4 text-sm leading-6 text-indigo-100">
-                  Premium placement with native integration. Reach a highly targeted audience that trusts the creator's recommendations.
+                  Premium placement with native integration. Reach a highly targeted audience that
+                  trusts the creator's recommendations.
                 </p>
 
                 <div className="mt-6 flex flex-col gap-3">
@@ -455,20 +520,44 @@ export function AdSlotDetail({ id }: Props) {
                 {/* Trust elements */}
                 <div className="mt-6 pt-5 border-t border-white/20 space-y-2.5">
                   <div className="flex items-center gap-2 text-xs text-indigo-200">
-                    <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <svg
+                      className="w-4 h-4 text-emerald-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                     <span>No payment until publisher accepts</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-indigo-200">
-                    <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <svg
+                      className="w-4 h-4 text-emerald-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                     <span>Flexible payment terms available</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-indigo-200">
-                    <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <svg
+                      className="w-4 h-4 text-emerald-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                     <span>Direct support from publisher</span>
                   </div>
@@ -502,10 +591,7 @@ export function AdSlotDetail({ id }: Props) {
                 <h2 className="text-xl font-semibold text-zinc-950">What's included</h2>
                 <div className="mt-4 grid gap-3">
                   {deliverables.map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-start gap-3 rounded-2xl bg-zinc-50 p-4"
-                    >
+                    <div key={item} className="flex items-start gap-3 rounded-2xl bg-zinc-50 p-4">
                       <div className="mt-1 h-2.5 w-2.5 rounded-full bg-zinc-900" />
                       <p className="text-zinc-700">{item}</p>
                     </div>
@@ -544,7 +630,7 @@ export function AdSlotDetail({ id }: Props) {
               {/* Preview Section */}
               <section className="rounded-3xl border border-zinc-200 bg-white p-6">
                 <div className="flex items-center justify-between gap-4">
-          <div>
+                  <div>
                     <h2 className="text-xl font-semibold text-zinc-950">Preview</h2>
                     <p className="mt-1 text-sm text-zinc-600">
                       See previous content or publisher examples.
@@ -579,9 +665,9 @@ export function AdSlotDetail({ id }: Props) {
                     </svg>
                     <p className="mt-2">Video / screenshot preview area</p>
                   </div>
-          </div>
+                </div>
               </section>
-        </div>
+            </div>
 
             {/* Sticky Request Form */}
             <aside>
@@ -600,93 +686,111 @@ export function AdSlotDetail({ id }: Props) {
                           stroke="currentColor"
                           strokeWidth="3"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M5 13l4 4L19 7"
-                          />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <h3 className="text-xl font-bold text-emerald-900">
-                        Request Sent!
-                      </h3>
+                      <h3 className="text-xl font-bold text-emerald-900">Request Sent!</h3>
                       <p className="mt-3 text-sm leading-6 text-emerald-700">
-                        The publisher will review your request and respond within <strong>24 hours</strong>. Check your email for updates!
+                        The publisher will review your request and respond within{' '}
+                        <strong>24 hours</strong>. Check your email for updates!
                       </p>
 
                       {/* Next steps */}
                       <div className="mt-5 pt-5 border-t border-emerald-200">
-                        <p className="text-xs font-semibold text-emerald-900 mb-3">WHAT HAPPENS NEXT:</p>
+                        <p className="text-xs font-semibold text-emerald-900 mb-3">
+                          WHAT HAPPENS NEXT:
+                        </p>
                         <div className="space-y-2 text-left">
                           <div className="flex items-start gap-2 text-xs text-emerald-800">
-                            <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-emerald-200 flex items-center justify-center font-bold text-emerald-900">1</span>
+                            <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-emerald-200 flex items-center justify-center font-bold text-emerald-900">
+                              1
+                            </span>
                             <span>Publisher reviews your campaign details</span>
                           </div>
                           <div className="flex items-start gap-2 text-xs text-emerald-800">
-                            <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-emerald-200 flex items-center justify-center font-bold text-emerald-900">2</span>
+                            <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-emerald-200 flex items-center justify-center font-bold text-emerald-900">
+                              2
+                            </span>
                             <span>You'll receive a response within 24h</span>
                           </div>
                           <div className="flex items-start gap-2 text-xs text-emerald-800">
-                            <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-emerald-200 flex items-center justify-center font-bold text-emerald-900">3</span>
+                            <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-emerald-200 flex items-center justify-center font-bold text-emerald-900">
+                              3
+                            </span>
                             <span>Finalize details & go live!</span>
                           </div>
                         </div>
                       </div>
                     </div>
-              <button
-                onClick={handleUnbook}
+                    <button
+                      onClick={handleUnbook}
                       className="w-full text-xs text-zinc-500 underline hover:text-zinc-700 mt-3"
-              >
+                    >
                       Reset (for testing)
-              </button>
-          </div>
+                    </button>
+                  </div>
                 ) : (
                   <>
                     <div className="mb-6">
-                      <h2 className="text-2xl font-bold text-zinc-950">
-                        Request This Placement
-                      </h2>
+                      <h2 className="text-2xl font-bold text-zinc-950">Request This Placement</h2>
                       <p className="mt-2 text-sm leading-6 text-zinc-600">
-                        Tell the publisher about your campaign. The more details you share, the faster they can respond!
+                        Tell the publisher about your campaign. The more details you share, the
+                        faster they can respond!
                       </p>
                     </div>
 
                     {/* Progress indicator */}
                     <div className="mb-6 bg-indigo-50 border border-indigo-200 rounded-xl p-4">
                       <p className="text-xs font-semibold text-indigo-900 mb-3 flex items-center gap-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                          />
                         </svg>
                         BOOKING PROCESS
                       </p>
                       <div className="space-y-2">
                         <div className="flex items-center gap-2 text-xs">
-                          <div className="shrink-0 w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold">1</div>
+                          <div className="shrink-0 w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold">
+                            1
+                          </div>
                           <span className="font-semibold text-indigo-900">Submit request</span>
                           <span className="text-indigo-600">← You are here</span>
                         </div>
                         <div className="flex items-center gap-2 text-xs text-zinc-500">
-                          <div className="shrink-0 w-5 h-5 rounded-full bg-zinc-200 flex items-center justify-center font-bold">2</div>
+                          <div className="shrink-0 w-5 h-5 rounded-full bg-zinc-200 flex items-center justify-center font-bold">
+                            2
+                          </div>
                           <span>Publisher responds (24h)</span>
                         </div>
                         <div className="flex items-center gap-2 text-xs text-zinc-500">
-                          <div className="shrink-0 w-5 h-5 rounded-full bg-zinc-200 flex items-center justify-center font-bold">3</div>
+                          <div className="shrink-0 w-5 h-5 rounded-full bg-zinc-200 flex items-center justify-center font-bold">
+                            3
+                          </div>
                           <span>Finalize & launch</span>
                         </div>
                       </div>
                     </div>
 
-            {roleLoading ? (
+                    {roleLoading ? (
                       <div className="py-12 text-center text-sm text-zinc-500">Loading...</div>
-            ) : roleInfo?.role === 'sponsor' && roleInfo?.sponsorId ? (
+                    ) : roleInfo?.role === 'sponsor' && roleInfo?.sponsorId ? (
                       <form className="space-y-5">
-                <div>
+                        <div>
                           <label
                             htmlFor="company"
                             className="mb-2 block text-sm font-semibold text-zinc-900"
                           >
                             Your Company
-                  </label>
+                          </label>
                           <input
                             id="company"
                             name="company"
@@ -694,21 +798,25 @@ export function AdSlotDetail({ id }: Props) {
                             readOnly
                             className="w-full rounded-xl border-2 border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 font-medium outline-none"
                           />
-                </div>
+                        </div>
 
-                <div>
-                  <label
-                    htmlFor="message"
+                        <div>
+                          <label
+                            htmlFor="message"
                             className="mb-2 block text-sm font-semibold text-zinc-900"
-                  >
+                          >
                             Campaign Details
-                  </label>
+                          </label>
 
                           {/* Helper text with suggestions */}
                           <div className="mb-2 text-xs text-zinc-600 bg-blue-50 border border-blue-200 rounded-lg p-3">
                             <p className="font-semibold text-blue-900 mb-1 flex items-center gap-1.5">
                               <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                <path
+                                  fillRule="evenodd"
+                                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                  clipRule="evenodd"
+                                />
                               </svg>
                               TIP: Include these details:
                             </p>
@@ -720,19 +828,24 @@ export function AdSlotDetail({ id }: Props) {
                             </ul>
                           </div>
 
-                  <textarea
-                    id="message"
+                          <textarea
+                            id="message"
                             name="message"
                             rows={8}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
                             placeholder="Example: We're a B2B SaaS tool that helps developers automate testing. Our target audience is software engineers and DevOps teams. We're launching a new feature and want to reach your engaged developer community. Timeline: Next 2 months. Budget: Flexible for the right fit!"
                             className="w-full rounded-xl border-2 border-zinc-300 px-4 py-3 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
-                  />
+                          />
                           <p className="mt-1.5 text-xs text-zinc-500">
-                            {message.length} characters • {message.length < 50 ? 'Add more details to improve response rate' : message.length < 150 ? 'Good start! Consider adding more context' : '✓ Great detail!'}
+                            {message.length} characters •{' '}
+                            {message.length < 50
+                              ? 'Add more details to improve response rate'
+                              : message.length < 150
+                                ? 'Good start! Consider adding more context'
+                                : '✓ Great detail!'}
                           </p>
-                </div>
+                        </div>
 
                         {bookingError && (
                           <div className="rounded-xl bg-red-50 border-2 border-red-200 p-3 text-sm text-red-700">
@@ -740,9 +853,9 @@ export function AdSlotDetail({ id }: Props) {
                           </div>
                         )}
 
-                <button
+                        <button
                           type="button"
-                  onClick={handleBooking}
+                          onClick={handleBooking}
                           disabled={booking || !adSlot.isAvailable}
                           style={{
                             display: 'inline-flex',
@@ -750,67 +863,123 @@ export function AdSlotDetail({ id }: Props) {
                             alignItems: 'center',
                             justifyContent: 'center',
                             borderRadius: '12px',
-                            background: booking || !adSlot.isAvailable ? '#93c5fd' : 'linear-gradient(to right, #4f46e5, #7c3aed)',
+                            background:
+                              booking || !adSlot.isAvailable
+                                ? '#93c5fd'
+                                : 'linear-gradient(to right, #4f46e5, #7c3aed)',
                             padding: '16px 24px',
                             fontSize: '16px',
                             fontWeight: '700',
                             color: '#ffffff',
                             border: 'none',
-                            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                            boxShadow:
+                              '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
                             transition: 'all 0.2s',
                             cursor: booking || !adSlot.isAvailable ? 'not-allowed' : 'pointer',
                             opacity: booking || !adSlot.isAvailable ? 0.5 : 1,
                           }}
                           onMouseEnter={(e) => {
                             if (!booking && adSlot.isAvailable) {
-                              e.currentTarget.style.background = 'linear-gradient(to right, #4338ca, #6d28d9)';
-                              e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+                              e.currentTarget.style.background =
+                                'linear-gradient(to right, #4338ca, #6d28d9)';
+                              e.currentTarget.style.boxShadow =
+                                '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
                               e.currentTarget.style.transform = 'translateY(-2px)';
                             }
                           }}
                           onMouseLeave={(e) => {
                             if (!booking && adSlot.isAvailable) {
-                              e.currentTarget.style.background = 'linear-gradient(to right, #4f46e5, #7c3aed)';
-                              e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+                              e.currentTarget.style.background =
+                                'linear-gradient(to right, #4f46e5, #7c3aed)';
+                              e.currentTarget.style.boxShadow =
+                                '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
                               e.currentTarget.style.transform = 'translateY(0)';
                             }
                           }}
-                >
+                        >
                           {booking ? (
                             <>
-                              <svg style={{ animation: 'spin 1s linear infinite', marginLeft: '-4px', marginRight: '8px', height: '16px', width: '16px', color: 'white' }} fill="none" viewBox="0 0 24 24">
-                                <circle style={{ opacity: 0.25 }} cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                <path style={{ opacity: 0.75 }} fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                              <svg
+                                style={{
+                                  animation: 'spin 1s linear infinite',
+                                  marginLeft: '-4px',
+                                  marginRight: '8px',
+                                  height: '16px',
+                                  width: '16px',
+                                  color: 'white',
+                                }}
+                                fill="none"
+                                viewBox="0 0 24 24"
+                              >
+                                <circle
+                                  style={{ opacity: 0.25 }}
+                                  cx="12"
+                                  cy="12"
+                                  r="10"
+                                  stroke="currentColor"
+                                  strokeWidth="4"
+                                ></circle>
+                                <path
+                                  style={{ opacity: 0.75 }}
+                                  fill="currentColor"
+                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                ></path>
                               </svg>
                               Sending Request...
                             </>
                           ) : (
                             'Send Booking Request'
                           )}
-                </button>
+                        </button>
 
                         {/* Trust signals below button */}
                         <div className="flex items-center justify-center gap-4 text-xs text-zinc-600">
                           <div className="flex items-center gap-1">
-                            <svg className="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            <svg
+                              className="w-3.5 h-3.5 text-emerald-500"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clipRule="evenodd"
+                              />
                             </svg>
                             <span>No payment now</span>
                           </div>
                           <div className="flex items-center gap-1">
-                            <svg className="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            <svg
+                              className="w-3.5 h-3.5 text-emerald-500"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clipRule="evenodd"
+                              />
                             </svg>
                             <span>Response in 24h</span>
                           </div>
                         </div>
                       </form>
-            ) : (
+                    ) : (
                       <div className="space-y-4">
                         <div className="rounded-xl bg-amber-50 border-2 border-amber-200 p-5 text-center">
                           <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-amber-100 flex items-center justify-center">
-                            <svg className="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            <svg
+                              className="w-6 h-6 text-amber-700"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                              />
                             </svg>
                           </div>
                           <p className="font-semibold text-amber-900 mb-1">Login Required</p>
@@ -820,20 +989,30 @@ export function AdSlotDetail({ id }: Props) {
                               : 'Sign in with a sponsor account to book this placement'}
                           </p>
                         </div>
-                <button
+                        <button
                           type="button"
-                  disabled
+                          disabled
                           className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-xl bg-zinc-200 px-4 py-3 text-sm font-semibold text-zinc-500"
-                >
+                        >
                           Submit Request
-                </button>
-              </div>
-            )}
+                        </button>
+                      </div>
+                    )}
 
                     <div className="mt-5 rounded-xl bg-zinc-50 border border-zinc-200 p-4 text-sm leading-6 text-zinc-700">
                       <div className="flex items-start gap-2">
-                        <svg className="w-5 h-5 text-indigo-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg
+                          className="w-5 h-5 text-indigo-600 mt-0.5 shrink-0"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
                         </svg>
                         <div>
                           <p className="font-semibold text-zinc-900 mb-1">Investment Summary</p>
@@ -846,7 +1025,7 @@ export function AdSlotDetail({ id }: Props) {
                           </p>
                         </div>
                       </div>
-          </div>
+                    </div>
                   </>
                 )}
               </div>

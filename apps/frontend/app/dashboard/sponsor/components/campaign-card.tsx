@@ -33,7 +33,7 @@ const statusColors: Record<string, string> = {
 const formatStatus = (status: string): string => {
   return status
     .split('_')
-    .map(word => word.charAt(0) + word.slice(1).toLowerCase())
+    .map((word) => word.charAt(0) + word.slice(1).toLowerCase())
     .join(' ');
 };
 
@@ -52,7 +52,14 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
     startTransition(async () => {
       const result = await updateCampaignStatus(
         campaign.id,
-        newStatus as 'DRAFT' | 'PENDING_REVIEW' | 'APPROVED' | 'ACTIVE' | 'PAUSED' | 'COMPLETED' | 'CANCELLED'
+        newStatus as
+          | 'DRAFT'
+          | 'PENDING_REVIEW'
+          | 'APPROVED'
+          | 'ACTIVE'
+          | 'PAUSED'
+          | 'COMPLETED'
+          | 'CANCELLED'
       );
       if (result.error) {
         setError(result.error);
@@ -89,7 +96,9 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
         transition={{ duration: 0.3 }}
       >
         <Card>
-          <h3 className="text-lg font-semibold mb-4 text-[var(--color-text-primary)]">Edit Campaign</h3>
+          <h3 className="text-lg font-semibold mb-4 text-[var(--color-text-primary)]">
+            Edit Campaign
+          </h3>
           <CampaignForm
             campaign={
               campaign as unknown as {
@@ -129,7 +138,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
             <CardContent>
               <AnimatePresence>
                 {error && (
-                  <motion.div 
+                  <motion.div
                     className="mb-3 rounded-lg border border-red-200 bg-red-50 p-2 text-xs text-[var(--color-error)]"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -144,9 +153,13 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
               {/* Header with Title and Status */}
               <div className="mb-4 flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-bold text-[var(--color-text-primary)] truncate">{campaign.name}</h3>
+                  <h3 className="text-lg font-bold text-[var(--color-text-primary)] truncate">
+                    {campaign.name}
+                  </h3>
                   {campaign.description && (
-                    <p className="mt-1 text-sm text-[var(--color-text-secondary)] line-clamp-2">{campaign.description}</p>
+                    <p className="mt-1 text-sm text-[var(--color-text-secondary)] line-clamp-2">
+                      {campaign.description}
+                    </p>
                   )}
                 </div>
                 <motion.span
@@ -195,15 +208,37 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
               {/* Date Range */}
               <div className="mb-4 flex items-center gap-2 text-xs text-[var(--color-text-secondary)]">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
                 </svg>
                 <span>
-                  {new Date(campaign.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} - {new Date(campaign.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  {new Date(campaign.startDate).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}{' '}
+                  -{' '}
+                  {new Date(campaign.endDate).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
                 </span>
               </div>
 
               {/* Action Buttons */}
-              <div style={{ display: 'flex', gap: '8px', paddingTop: '16px', borderTop: '1px solid #f3f4f6' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '8px',
+                  paddingTop: '16px',
+                  borderTop: '1px solid #f3f4f6',
+                }}
+              >
                 <button
                   onClick={() => setIsEditing(true)}
                   disabled={isPending}

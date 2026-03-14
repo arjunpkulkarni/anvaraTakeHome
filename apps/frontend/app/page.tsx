@@ -1,10 +1,5 @@
 import type { Metadata } from 'next';
-import {
-  HeroSection,
-  FeaturesSection,
-  HowItWorksSection,
-  CTASection,
-} from './landing/components';
+import { HeroSection, FeaturesSection, HowItWorksSection, CTASection } from './landing/components';
 
 export const metadata: Metadata = {
   title: 'Anvara',
@@ -19,7 +14,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Anvara - The Sponsorship Marketplace for Modern Creators',
-    description: 'Connect sponsors with publishers. Launch campaigns, manage ad slots, and grow your business.',
+    description:
+      'Connect sponsors with publishers. Launch campaigns, manage ad slots, and grow your business.',
   },
 };
 

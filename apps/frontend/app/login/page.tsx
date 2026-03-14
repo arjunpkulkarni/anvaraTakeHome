@@ -71,37 +71,45 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      background: '#ffffff',
-    }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        background: '#ffffff',
+      }}
+    >
       {/* Left Side - Branding/Visual */}
-      <div style={{
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        padding: '80px 60px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+      <div
+        style={{
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          padding: '80px 60px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
         {/* Background Pattern */}
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          opacity: 0.4,
-        }} />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            opacity: 0.4,
+          }}
+        />
 
         <div style={{ position: 'relative', zIndex: 1 }}>
           {/* Logo */}
-          <div style={{
-            marginBottom: '48px',
-            display: 'flex',
-            alignItems: 'center',
-          }}>
+          <div
+            style={{
+              marginBottom: '48px',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
             <Image
               src="/anvara_logo_blue_1000px.png"
               alt="Anvara Logo"
@@ -114,13 +122,15 @@ export default function LoginPage() {
             />
           </div>
 
-          <p style={{
-            fontSize: '24px',
-            color: 'rgba(255, 255, 255, 0.9)',
-            marginBottom: '48px',
-            lineHeight: '1.6',
-            maxWidth: '500px',
-          }}>
+          <p
+            style={{
+              fontSize: '24px',
+              color: 'rgba(255, 255, 255, 0.9)',
+              marginBottom: '48px',
+              lineHeight: '1.6',
+              maxWidth: '500px',
+            }}
+          >
             The modern sponsorship marketplace connecting brands with creators
           </p>
 
@@ -131,28 +141,31 @@ export default function LoginPage() {
               { icon: '✓', text: 'Manage campaigns and ad slots in one place' },
               { icon: '✓', text: 'Track performance and grow your business' },
             ].map((feature, idx) => (
-              <div key={idx} style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '16px',
-                color: 'white',
-              }}>
-                <div style={{
-                  width: '32px',
-                  height: '32px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                  borderRadius: '8px',
+              <div
+                key={idx}
+                style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  fontWeight: 'bold',
-                }}>
+                  gap: '16px',
+                  color: 'white',
+                }}
+              >
+                <div
+                  style={{
+                    width: '32px',
+                    height: '32px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '18px',
+                    fontWeight: 'bold',
+                  }}
+                >
                   {feature.icon}
                 </div>
-                <span style={{ fontSize: '16px', opacity: 0.95 }}>
-                  {feature.text}
-                </span>
+                <span style={{ fontSize: '16px', opacity: 0.95 }}>{feature.text}</span>
               </div>
             ))}
           </div>
@@ -160,47 +173,65 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side - Login Form */}
-      <div style={{
-        padding: '60px 80px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        backgroundColor: '#fafafa',
-        overflow: 'hidden',
-      }}>
+      <div
+        style={{
+          padding: '60px 80px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          backgroundColor: '#fafafa',
+          overflow: 'hidden',
+        }}
+      >
         <div style={{ maxWidth: '540px', width: '100%' }}>
-          <h2 style={{
-            fontSize: '32px',
-            fontWeight: '700',
-            color: '#111827',
-            marginBottom: '8px',
-            lineHeight: '1.2',
-          }}>
+          <h2
+            style={{
+              fontSize: '32px',
+              fontWeight: '700',
+              color: '#111827',
+              marginBottom: '8px',
+              lineHeight: '1.2',
+            }}
+          >
             Welcome back
           </h2>
 
-          <p style={{
-            fontSize: '18px',
-            color: '#6b7280',
-            marginBottom: '32px',
-          }}>
+          <p
+            style={{
+              fontSize: '18px',
+              color: '#6b7280',
+              marginBottom: '32px',
+            }}
+          >
             Sign in to your account to continue
           </p>
 
           {error && (
-            <div role="alert" style={{
-              marginBottom: '24px',
-              padding: '14px 18px',
-              backgroundColor: '#fef2f2',
-              border: '1px solid #fecaca',
-              borderRadius: '12px',
-              color: '#dc2626',
-              fontSize: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-            }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <div
+              role="alert"
+              style={{
+                marginBottom: '24px',
+                padding: '14px 18px',
+                backgroundColor: '#fef2f2',
+                border: '1px solid #fecaca',
+                borderRadius: '12px',
+                color: '#dc2626',
+                fontSize: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+              }}
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <circle cx="12" cy="12" r="10" />
                 <line x1="12" y1="8" x2="12" y2="12" />
                 <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -211,13 +242,15 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: '24px' }}>
-              <label style={{
-                display: 'block',
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#374151',
-                marginBottom: '12px',
-              }}>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  color: '#374151',
+                  marginBottom: '12px',
+                }}
+              >
                 Choose your role
               </label>
 
@@ -237,39 +270,56 @@ export default function LoginPage() {
                     cursor: 'pointer',
                     transition: 'all 0.2s',
                     transform: sponsorHovered ? 'translateY(-4px)' : 'translateY(0)',
-                    boxShadow: sponsorHovered ? '0 12px 24px rgba(0,0,0,0.12)' : '0 2px 8px rgba(0,0,0,0.06)',
+                    boxShadow: sponsorHovered
+                      ? '0 12px 24px rgba(0,0,0,0.12)'
+                      : '0 2px 8px rgba(0,0,0,0.06)',
                   }}
                 >
-                  <div style={{
-                    width: '48px',
-                    height: '48px',
-                    backgroundColor: role === 'sponsor' ? '#667eea' : '#f3f4f6',
-                    borderRadius: '12px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto 12px',
-                  }}>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={role === 'sponsor' ? 'white' : '#9ca3af'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <div
+                    style={{
+                      width: '48px',
+                      height: '48px',
+                      backgroundColor: role === 'sponsor' ? '#667eea' : '#f3f4f6',
+                      borderRadius: '12px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto 12px',
+                    }}
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke={role === 'sponsor' ? 'white' : '#9ca3af'}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                       <circle cx="8.5" cy="7" r="4" />
                       <polyline points="17 11 19 13 23 9" />
                     </svg>
                   </div>
-                  <div style={{
-                    fontSize: '16px',
-                    fontWeight: '700',
-                    color: role === 'sponsor' ? '#667eea' : '#374151',
-                    marginBottom: '4px',
-                    textAlign: 'center',
-                  }}>
+                  <div
+                    style={{
+                      fontSize: '16px',
+                      fontWeight: '700',
+                      color: role === 'sponsor' ? '#667eea' : '#374151',
+                      marginBottom: '4px',
+                      textAlign: 'center',
+                    }}
+                  >
                     Sponsor
                   </div>
-                  <div style={{
-                    fontSize: '13px',
-                    color: '#6b7280',
-                    textAlign: 'center',
-                  }}>
+                  <div
+                    style={{
+                      fontSize: '13px',
+                      color: '#6b7280',
+                      textAlign: 'center',
+                    }}
+                  >
                     Run campaigns
                   </div>
                 </button>
@@ -288,39 +338,56 @@ export default function LoginPage() {
                     cursor: 'pointer',
                     transition: 'all 0.2s',
                     transform: publisherHovered ? 'translateY(-4px)' : 'translateY(0)',
-                    boxShadow: publisherHovered ? '0 12px 24px rgba(0,0,0,0.12)' : '0 2px 8px rgba(0,0,0,0.06)',
+                    boxShadow: publisherHovered
+                      ? '0 12px 24px rgba(0,0,0,0.12)'
+                      : '0 2px 8px rgba(0,0,0,0.06)',
                   }}
                 >
-                  <div style={{
-                    width: '48px',
-                    height: '48px',
-                    backgroundColor: role === 'publisher' ? '#667eea' : '#f3f4f6',
-                    borderRadius: '12px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto 12px',
-                  }}>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={role === 'publisher' ? 'white' : '#9ca3af'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <div
+                    style={{
+                      width: '48px',
+                      height: '48px',
+                      backgroundColor: role === 'publisher' ? '#667eea' : '#f3f4f6',
+                      borderRadius: '12px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto 12px',
+                    }}
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke={role === 'publisher' ? 'white' : '#9ca3af'}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                       <line x1="3" y1="9" x2="21" y2="9" />
                       <line x1="9" y1="21" x2="9" y2="9" />
                     </svg>
                   </div>
-                  <div style={{
-                    fontSize: '16px',
-                    fontWeight: '700',
-                    color: role === 'publisher' ? '#667eea' : '#374151',
-                    marginBottom: '4px',
-                    textAlign: 'center',
-                  }}>
+                  <div
+                    style={{
+                      fontSize: '16px',
+                      fontWeight: '700',
+                      color: role === 'publisher' ? '#667eea' : '#374151',
+                      marginBottom: '4px',
+                      textAlign: 'center',
+                    }}
+                  >
                     Publisher
                   </div>
-                  <div style={{
-                    fontSize: '13px',
-                    color: '#6b7280',
-                    textAlign: 'center',
-                  }}>
+                  <div
+                    style={{
+                      fontSize: '13px',
+                      color: '#6b7280',
+                      textAlign: 'center',
+                    }}
+                  >
                     Manage ad slots
                   </div>
                 </button>
@@ -339,26 +406,32 @@ export default function LoginPage() {
             </div>
 
             {/* Info Box */}
-            <div style={{
-              padding: '16px 20px',
-              backgroundColor: 'white',
-              borderRadius: '12px',
-              marginBottom: '24px',
-              border: '1px solid #e5e7eb',
-            }}>
-              <div style={{
-                fontSize: '12px',
-                color: '#6b7280',
-                marginBottom: '4px',
-                fontWeight: '500',
-              }}>
+            <div
+              style={{
+                padding: '16px 20px',
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                marginBottom: '24px',
+                border: '1px solid #e5e7eb',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '12px',
+                  color: '#6b7280',
+                  marginBottom: '4px',
+                  fontWeight: '500',
+                }}
+              >
                 Demo account
               </div>
-              <div style={{
-                fontSize: '15px',
-                fontWeight: '600',
-                color: '#374151',
-              }}>
+              <div
+                style={{
+                  fontSize: '15px',
+                  fontWeight: '600',
+                  color: '#374151',
+                }}
+              >
                 {email}
               </div>
             </div>
@@ -413,7 +486,16 @@ export default function LoginPage() {
                 </>
               ) : (
                 <>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
                     <polyline points="10 17 15 12 10 7" />
                     <line x1="15" y1="12" x2="3" y2="12" />

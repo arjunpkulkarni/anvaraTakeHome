@@ -185,9 +185,7 @@ describe('API Tests', () => {
           name: 'Updated Test Sponsor',
           industry: 'Healthcare',
         };
-        const response = await request(app)
-          .put(`/api/sponsors/${testSponsorId}`)
-          .send(updatedData);
+        const response = await request(app).put(`/api/sponsors/${testSponsorId}`).send(updatedData);
         expect(response.status).toBe(200);
         expect(response.body.name).toBe(updatedData.name);
         expect(response.body.industry).toBe(updatedData.industry);

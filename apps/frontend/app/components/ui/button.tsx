@@ -3,14 +3,28 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 
-interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag'> {
+interface ButtonProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag'
+> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'dark';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', size = 'md', fullWidth = false, className = '', children, disabled, ...props }, ref) => {
+  (
+    {
+      variant = 'primary',
+      size = 'md',
+      fullWidth = false,
+      className = '',
+      children,
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
     const baseStyles =
       'inline-flex items-center justify-center font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
 

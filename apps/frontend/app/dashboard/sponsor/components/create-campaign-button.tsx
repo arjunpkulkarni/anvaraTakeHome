@@ -10,7 +10,7 @@ export function CreateCampaignButton() {
 
   if (isOpen) {
     return (
-      <div 
+      <div
         style={{
           position: 'fixed',
           inset: 0,
@@ -24,7 +24,7 @@ export function CreateCampaignButton() {
         }}
         onClick={() => setIsOpen(false)}
       >
-        <div 
+        <div
           style={{
             width: '100%',
             maxWidth: '672px',
@@ -37,18 +37,22 @@ export function CreateCampaignButton() {
           }}
           onClick={(e) => e.stopPropagation()}
         >
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'space-between',
-            marginBottom: '24px',
-          }}>
-            <h2 style={{
-              fontSize: '24px',
-              fontWeight: '700',
-              color: '#111827',
-              margin: 0,
-            }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '24px',
+            }}
+          >
+            <h2
+              style={{
+                fontSize: '24px',
+                fontWeight: '700',
+                color: '#111827',
+                margin: 0,
+              }}
+            >
               Create Campaign
             </h2>
             <button

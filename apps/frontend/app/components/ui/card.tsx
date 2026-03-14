@@ -3,7 +3,10 @@
 import { HTMLAttributes, forwardRef } from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 
-interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag'> {
+interface CardProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag'
+> {
   hover?: boolean;
   padding?: 'sm' | 'md' | 'lg';
   animate?: boolean;
@@ -55,31 +58,51 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
 
 Card.displayName = 'Card';
 
-export const CardHeader = ({ className = '', children, ...props }: HTMLAttributes<HTMLDivElement>) => (
+export const CardHeader = ({
+  className = '',
+  children,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) => (
   <div className={`mb-4 ${className}`} {...props}>
     {children}
   </div>
 );
 
-export const CardTitle = ({ className = '', children, ...props }: HTMLAttributes<HTMLHeadingElement>) => (
+export const CardTitle = ({
+  className = '',
+  children,
+  ...props
+}: HTMLAttributes<HTMLHeadingElement>) => (
   <h3 className={`text-xl font-semibold text-[var(--color-text-primary)] ${className}`} {...props}>
     {children}
   </h3>
 );
 
-export const CardDescription = ({ className = '', children, ...props }: HTMLAttributes<HTMLParagraphElement>) => (
+export const CardDescription = ({
+  className = '',
+  children,
+  ...props
+}: HTMLAttributes<HTMLParagraphElement>) => (
   <p className={`text-sm text-[var(--color-text-secondary)] ${className}`} {...props}>
     {children}
   </p>
 );
 
-export const CardContent = ({ className = '', children, ...props }: HTMLAttributes<HTMLDivElement>) => (
+export const CardContent = ({
+  className = '',
+  children,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) => (
   <div className={`${className}`} {...props}>
     {children}
   </div>
 );
 
-export const CardFooter = ({ className = '', children, ...props }: HTMLAttributes<HTMLDivElement>) => (
+export const CardFooter = ({
+  className = '',
+  children,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) => (
   <div className={`mt-4 flex items-center gap-2 ${className}`} {...props}>
     {children}
   </div>
