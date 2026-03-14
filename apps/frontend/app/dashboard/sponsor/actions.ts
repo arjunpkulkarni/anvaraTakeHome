@@ -171,7 +171,7 @@ export async function deleteCampaign(id: string): Promise<ActionState> {
 
 export async function updateCampaignStatus(
   id: string,
-  status: 'ACTIVE' | 'PAUSED' | 'COMPLETED'
+  status: 'DRAFT' | 'PENDING_REVIEW' | 'APPROVED' | 'ACTIVE' | 'PAUSED' | 'COMPLETED' | 'CANCELLED'
 ): Promise<ActionState> {
   try {
     const headers = await getAuthHeaders();

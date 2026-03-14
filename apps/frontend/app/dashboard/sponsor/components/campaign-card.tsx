@@ -52,7 +52,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
     startTransition(async () => {
       const result = await updateCampaignStatus(
         campaign.id,
-        newStatus as 'ACTIVE' | 'PAUSED' | 'COMPLETED'
+        newStatus as 'DRAFT' | 'PENDING_REVIEW' | 'APPROVED' | 'ACTIVE' | 'PAUSED' | 'COMPLETED' | 'CANCELLED'
       );
       if (result.error) {
         setError(result.error);
