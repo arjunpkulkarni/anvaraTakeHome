@@ -250,23 +250,27 @@ export function NewsletterSignup({ variant = 'default', placement = 'marketplace
                 }}
                 onMouseEnter={(e) => {
                   if (status !== 'loading') {
-                    e.target.style.backgroundColor = '#4338ca';
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+                    const target = e.currentTarget as HTMLButtonElement;
+                    target.style.backgroundColor = '#4338ca';
+                    target.style.transform = 'translateY(-2px)';
+                    target.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (status !== 'loading') {
-                    e.target.style.backgroundColor = '#4f46e5';
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
+                    const target = e.currentTarget as HTMLButtonElement;
+                    target.style.backgroundColor = '#4f46e5';
+                    target.style.transform = 'translateY(0)';
+                    target.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
                   }
                 }}
                 onFocus={(e) => {
-                  e.target.style.boxShadow = '0 0 0 2px rgba(79, 70, 229, 0.5), 0 0 0 4px rgba(79, 70, 229, 0.1)';
+                  const target = e.currentTarget as HTMLButtonElement;
+                  target.style.boxShadow = '0 0 0 2px rgba(79, 70, 229, 0.5), 0 0 0 4px rgba(79, 70, 229, 0.1)';
                 }}
                 onBlur={(e) => {
-                  e.target.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
+                  const target = e.currentTarget as HTMLButtonElement;
+                  target.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
                 }}
               >
                 {status === 'loading' ? (

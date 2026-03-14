@@ -19,7 +19,7 @@ router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
     const campaigns = await prisma.campaign.findMany({
       where: {
         sponsorId: req.user.sponsorId,
-        ...(status && { status: status as string }),
+        ...(status && { status: status as 'DRAFT' | 'PENDING_REVIEW' | 'APPROVED' | 'ACTIVE' | 'PAUSED' | 'COMPLETED' | 'CANCELLED' }),
       },
       include: {
         sponsor: { select: { id: true, name: true, logo: true } },

@@ -1,6 +1,6 @@
 /**
  * Google Analytics 4 Event Tracking Utilities
- * 
+ *
  * This module provides type-safe event tracking functions for GA4.
  * Events are only sent in production or when explicitly enabled.
  */
@@ -98,7 +98,7 @@ export const trackMarketplaceEvent = {
   requestPlacement: (adSlotId: string, campaignId?: string) => {
     trackEvent('request_placement', {
       ad_slot_id: adSlotId,
-      campaign_id: campaignId,
+      ...(campaignId && { campaign_id: campaignId }),
     });
   },
 
