@@ -1,8 +1,6 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-import { toastAnimation } from '@/lib/animations';
+import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
 
 type ToastType = 'success' | 'error' | 'info' | 'warning';
 
@@ -10,6 +8,7 @@ interface Toast {
   id: string;
   message: string;
   type: ToastType;
+  leaving?: boolean;
 }
 
 interface ToastContextType {
@@ -32,17 +31,24 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const showToast = useCallback((message: string, type: ToastType = 'info') => {
     const id = Math.random().toString(36).substr(2, 9);
     const newToast: Toast = { id, message, type };
-    
+
     setToasts((prev) => [...prev, newToast]);
-    
-    // Auto dismiss after 4 seconds
+
+    // Start exit animation after 3.5s, remove after 4s
+    setTimeout(() => {
+      setToasts((prev) => prev.map((t) => (t.id === id ? { ...t, leaving: true } : t)));
+    }, 3500);
+
     setTimeout(() => {
       setToasts((prev) => prev.filter((toast) => toast.id !== id));
     }, 4000);
   }, []);
 
   const removeToast = useCallback((id: string) => {
-    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+    setToasts((prev) => prev.map((t) => (t.id === id ? { ...t, leaving: true } : t)));
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((toast) => toast.id !== id));
+    }, 300);
   }, []);
 
   return (
@@ -60,11 +66,9 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           pointerEvents: 'none',
         }}
       >
-        <AnimatePresence mode="popLayout">
-          {toasts.map((toast) => (
-            <ToastItem key={toast.id} toast={toast} onDismiss={() => removeToast(toast.id)} />
-          ))}
-        </AnimatePresence>
+        {toasts.map((toast) => (
+          <ToastItem key={toast.id} toast={toast} onDismiss={() => removeToast(toast.id)} />
+        ))}
       </div>
     </ToastContext.Provider>
   );
@@ -76,36 +80,37 @@ interface ToastItemProps {
 }
 
 function ToastItem({ toast, onDismiss }: ToastItemProps) {
+  const [visible, setVisible] = useState(false);
   const styles = getToastStyles(toast.type);
-  
+
+  useEffect(() => {
+    // Trigger enter animation
+    const raf = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   return (
-    <motion.div
-      variants={toastAnimation}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      layout
+    <div
       style={{
         ...styles,
         display: 'flex',
         alignItems: 'center',
         gap: '12px',
         padding: '12px 16px',
-        borderRadius: '8px',
+        borderRadius: '10px',
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
         minWidth: '300px',
         maxWidth: '500px',
         pointerEvents: 'auto',
         cursor: 'pointer',
+        transition: 'all 0.3s ease',
+        opacity: visible && !toast.leaving ? 1 : 0,
+        transform: visible && !toast.leaving ? 'translateX(0)' : 'translateX(100%)',
       }}
       onClick={onDismiss}
     >
-      <div style={{ fontSize: '20px' }}>
-        {getToastIcon(toast.type)}
-      </div>
-      <div style={{ flex: 1, fontSize: '14px', fontWeight: 500 }}>
-        {toast.message}
-      </div>
+      <div style={{ fontSize: '20px' }}>{getToastIcon(toast.type)}</div>
+      <div style={{ flex: 1, fontSize: '14px', fontWeight: 500 }}>{toast.message}</div>
       <button
         onClick={(e) => {
           e.stopPropagation();
@@ -115,15 +120,16 @@ function ToastItem({ toast, onDismiss }: ToastItemProps) {
           background: 'transparent',
           border: 'none',
           cursor: 'pointer',
-          opacity: 0.6,
+          opacity: 0.7,
           fontSize: '18px',
           padding: '0 4px',
+          color: 'inherit',
         }}
         aria-label="Close"
       >
         ×
       </button>
-    </motion.div>
+    </div>
   );
 }
 

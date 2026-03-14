@@ -4,7 +4,7 @@ import { useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { useEffect } from 'react';
 import { createAdSlot, updateAdSlot } from '../actions';
-import { Button, Input, Textarea, Select, FormError } from '@/app/components/ui';
+import { Input, Textarea, Select, FormError } from '@/app/components/ui';
 
 interface AdSlot {
   id: string;
@@ -28,7 +28,29 @@ function SubmitButton({ isEdit }: { isEdit: boolean }) {
     <button
       type="submit"
       disabled={pending}
-      className="w-full inline-flex items-center justify-center rounded-lg bg-zinc-950 px-4 py-2 text-base font-medium text-white transition-colors duration-200 hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none"
+      style={{
+        width: '100%',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '8px',
+        backgroundColor: pending ? '#60a5fa' : '#2563eb',
+        padding: '12px 24px',
+        fontSize: '16px',
+        fontWeight: '600',
+        color: '#ffffff',
+        border: 'none',
+        cursor: pending ? 'not-allowed' : 'pointer',
+        transition: 'all 0.2s ease',
+        opacity: pending ? 0.7 : 1,
+        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
+      }}
+      onMouseEnter={(e) => {
+        if (!pending) e.currentTarget.style.backgroundColor = '#1d4ed8';
+      }}
+      onMouseLeave={(e) => {
+        if (!pending) e.currentTarget.style.backgroundColor = '#2563eb';
+      }}
     >
       {pending ? 'Saving...' : isEdit ? 'Update Ad Slot' : 'Create Ad Slot'}
     </button>
@@ -106,11 +128,34 @@ export function AdSlotForm({ adSlot, onSuccess, onCancel }: AdSlotFormProps) {
         </div>
       )}
 
-      <div className="flex gap-2 justify-end pt-2">
+      <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', paddingTop: '16px' }}>
         {onCancel && (
-          <Button type="button" onClick={onCancel} variant="secondary">
+          <button
+            type="button"
+            onClick={onCancel}
+            style={{
+              padding: '12px 24px',
+              fontSize: '16px',
+              fontWeight: '600',
+              borderRadius: '8px',
+              border: '1px solid #e5e7eb',
+              backgroundColor: '#ffffff',
+              color: '#374151',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#f9fafb';
+              e.currentTarget.style.borderColor = '#d1d5db';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#ffffff';
+              e.currentTarget.style.borderColor = '#e5e7eb';
+            }}
+          >
             Cancel
-          </Button>
+          </button>
         )}
         <SubmitButton isEdit={isEdit} />
       </div>
