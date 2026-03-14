@@ -310,11 +310,8 @@ Additional improvements include analytics integration and UI/UX enhancements.
 With more time, I would expand the project with:
 
 • A/B testing framework for marketplace optimization  
-• campaign performance analytics dashboard  
-• marketplace pagination and filtering  
-• improved validation and error handling  
-• E2E testing with Playwright  
-• enhanced mobile-first responsiveness  
+• campaign performance analytics dashboard
+• enhanced mobile-first responsiveness and overall UI 
 
 ---
 
