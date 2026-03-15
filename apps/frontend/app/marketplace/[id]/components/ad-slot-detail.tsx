@@ -495,11 +495,6 @@ export function AdSlotDetail({ id }: Props) {
                   <p className="text-[10px] text-indigo-300 mt-1">Based on similar campaigns</p>
                 </div>
 
-                <p className="mt-4 text-sm leading-6 text-indigo-100">
-                  Premium placement with native integration. Reach a highly targeted audience that
-                  trusts the creator's recommendations.
-                </p>
-
                 <div className="mt-6 flex flex-col gap-3">
                   <a
                     href="#request-form"

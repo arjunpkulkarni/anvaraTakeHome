@@ -50,6 +50,15 @@ export function AdSlotGrid({ filter }: AdSlotGridProps) {
     loadAdSlots();
   }, []);
 
+  // Auto-refresh every 45 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      loadAdSlots();
+    }, 45000); // 45 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   // Reset to page 1 when filter changes
   useEffect(() => {
     setCurrentPage(1);
