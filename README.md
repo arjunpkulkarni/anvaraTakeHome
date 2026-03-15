@@ -329,3 +329,44 @@ https://github.com/arjunpkulkarni
 # Notes
 
 This project was completed as part of the **Anvara engineering take-home assessment** and demonstrates full-stack development including frontend architecture, backend APIs, database integration, and analytics instrumentation.
+
+## Product Thinking
+
+While implementing the platform, I identified several opportunities to improve the marketplace experience.
+
+### 1. Marketplace Conversion Optimization
+
+Sponsors browsing placements may hesitate to book without clear performance indicators.
+
+Potential improvement:
+• show estimated impressions
+• display previous campaign performance
+• highlight “high performing” placements
+
+This would reduce friction and increase booking conversions.
+
+---
+
+### 2. Booking Confidence
+
+New sponsors may feel uncertain when booking advertising placements.
+
+Potential improvement:
+• add publisher credibility indicators
+• show campaign success examples
+• display estimated reach
+
+These changes would increase trust and encourage first-time bookings.
+
+---
+
+### 3. Campaign Performance Visibility
+
+Sponsors need feedback after launching campaigns.
+
+Potential improvement:
+• dashboard showing impressions
+• click-through rates
+• conversion metrics
+
+This would create a feedback loop that encourages repeat bookings.
