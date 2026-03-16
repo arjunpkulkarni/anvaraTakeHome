@@ -5,6 +5,7 @@ import './globals.css';
 import { Nav } from './components/nav';
 import { ToastProvider } from './components/ui';
 import { ErrorBoundary } from './components/error-boundary';
+import { Providers } from './providers';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -112,18 +113,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" href="/favicon.png" />
       </head>
       <body className="min-h-screen antialiased">
-        <ErrorBoundary>
-          <ToastProvider>
-            <a
-              href="#main-content"
-              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-(--color-primary) focus:text-white focus:rounded"
-            >
-              Skip to main content
-            </a>
-            <Nav />
-            <main id="main-content">{children}</main>
-          </ToastProvider>
-        </ErrorBoundary>
+        <Providers>
+          <ErrorBoundary>
+            <ToastProvider>
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-(--color-primary) focus:text-white focus:rounded"
+              >
+                Skip to main content
+              </a>
+              <Nav />
+              <main id="main-content">{children}</main>
+            </ToastProvider>
+          </ErrorBoundary>
+        </Providers>
         {/* Google Analytics - Only loads in production or when GA_ID is set */}
         {gaId && gaId !== 'G-XXXXXXXXXX' && <GoogleAnalytics gaId={gaId} />}
       </body>

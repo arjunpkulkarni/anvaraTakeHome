@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { CampaignList } from './campaign-list';
 import { CreateCampaignButton } from './create-campaign-button';
 import { FilterBar } from '@/app/components/filter-bar';
+import { RecommendedPlacements } from './recommended-placements';
 
 interface Campaign {
   id: string;
@@ -33,6 +34,10 @@ export function SponsorDashboardClient({ campaigns }: SponsorDashboardClientProp
       return campaign.status === 'COMPLETED' || campaign.status === 'PAUSED';
     return true;
   });
+
+  // Pick the first ACTIVE campaign for recommendations, falling back to the first campaign
+  const recommendationCampaign =
+    campaigns.find((c) => c.status === 'ACTIVE') ?? campaigns[0] ?? null;
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
@@ -67,6 +72,14 @@ export function SponsorDashboardClient({ campaigns }: SponsorDashboardClientProp
         />
 
         <CampaignList campaigns={filteredCampaigns} />
+
+        {/* Recommended Placements – scoped to the first active campaign */}
+        {recommendationCampaign && (
+          <RecommendedPlacements
+            campaignId={recommendationCampaign.id}
+            campaignName={recommendationCampaign.name}
+          />
+        )}
       </div>
     </div>
   );
