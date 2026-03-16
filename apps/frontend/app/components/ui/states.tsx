@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 
 interface EmptyStateProps {
+  icon?: string;
   title: string;
   description?: string;
   action?: {
@@ -13,7 +14,7 @@ interface EmptyStateProps {
   children?: ReactNode;
 }
 
-export function EmptyState({ title, description, action, children }: EmptyStateProps) {
+export function EmptyState({ icon, title, description, action, children }: EmptyStateProps) {
   return (
     <motion.div
       className="flex flex-col items-center justify-center py-16 px-4 text-center"
@@ -21,6 +22,7 @@ export function EmptyState({ title, description, action, children }: EmptyStateP
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
+      {icon && <div className="text-5xl mb-4">{icon}</div>}
       <h3 className="text-2xl font-semibold text-gray-900 mb-3">{title}</h3>
       {description && (
         <p className="text-gray-600 max-w-md mb-6 text-lg" style={{ marginTop: '10px' }}>

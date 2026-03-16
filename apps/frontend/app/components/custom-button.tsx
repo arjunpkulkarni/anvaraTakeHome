@@ -1,7 +1,7 @@
-import { ButtonHTMLAttributes, forwardRef } from 'react';
-import { motion } from 'framer-motion';
+import { forwardRef } from 'react';
+import { motion, type HTMLMotionProps } from 'framer-motion';
 
-interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface CustomButtonProps extends HTMLMotionProps<'button'> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;

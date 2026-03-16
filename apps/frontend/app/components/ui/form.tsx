@@ -1,15 +1,14 @@
 'use client';
 
 import {
-  InputHTMLAttributes,
   TextareaHTMLAttributes,
   SelectHTMLAttributes,
   forwardRef,
   useState,
 } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type HTMLMotionProps } from 'framer-motion';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends HTMLMotionProps<'input'> {
   error?: string;
   label?: string;
 }

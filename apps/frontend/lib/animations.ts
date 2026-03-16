@@ -208,8 +208,7 @@ export const toastAnimation: Variants = {
     y: 0,
     scale: 1,
     transition: {
-      duration: DURATIONS.normal,
-      ease: EASINGS.springGentle,
+      ...EASINGS.springGentle,
     },
   },
   exit: {
@@ -298,7 +297,7 @@ export const skeletonAnimation = {
   transition: {
     duration: 1.5,
     repeat: Infinity,
-    ease: 'easeInOut',
+    ease: 'easeInOut' as const,
   },
 };
 

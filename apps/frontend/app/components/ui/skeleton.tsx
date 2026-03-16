@@ -1,5 +1,6 @@
 'use client';
 
+import { type CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import { skeletonAnimation } from '@/lib/animations';
 
@@ -8,6 +9,7 @@ interface SkeletonProps {
   height?: string | number;
   borderRadius?: string;
   className?: string;
+  style?: CSSProperties;
 }
 
 export function Skeleton({
@@ -15,6 +17,7 @@ export function Skeleton({
   height = '20px',
   borderRadius = '4px',
   className = '',
+  style,
 }: SkeletonProps) {
   return (
     <motion.div
@@ -24,6 +27,7 @@ export function Skeleton({
         height,
         borderRadius,
         backgroundColor: '#e5e7eb',
+        ...style,
       }}
       className={className}
     />
