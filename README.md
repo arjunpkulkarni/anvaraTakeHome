@@ -370,3 +370,31 @@ Potential improvement:
 • conversion metrics
 
 This would create a feedback loop that encourages repeat bookings.
+
+# NEW ADDITION: Recommendation Engine
+
+To improve the sponsor experience when browsing the marketplace, I implemented a **placement recommendation engine** that suggests relevant advertising slots based on campaign goals and marketplace data.
+
+When a sponsor views a campaign, the backend evaluates available placements and ranks them using a weighted scoring model that considers several factors:
+
+• **Audience overlap** — how closely the publisher’s content category matches the campaign’s target categories
+• **Price efficiency** — how affordable the placement is relative to the campaign’s remaining budget
+• **Historical performance** — past click-through rate (CTR) from previous placements when data exists
+• **Audience reach** — estimated exposure based on publisher monthly views
+
+Each placement receives a combined score derived from these signals. The system then returns the **top ranked placements as recommendations** for the sponsor.
+
+To keep the system transparent, each recommendation includes **human-readable explanations** describing why the placement was suggested. Examples include:
+
+• “Perfect audience match for Technology campaigns”
+• “Excellent value — only 8.5% of remaining campaign budget”
+• “Strong reach — 250K monthly views”
+• “Good performance — 1.8% average CTR”
+
+The recommendation logic is implemented as a backend service and exposed through the endpoint:
+
+GET /campaigns/:id/recommendations
+
+This endpoint returns the **top recommended ad slots for a campaign**, allowing the frontend to surface intelligent suggestions directly within the sponsor dashboard.
+
+The system is intentionally **explainable and deterministic**, prioritizing transparency and product usability while still incorporating historical marketplace performance data to improve placement discovery.
